@@ -1,0 +1,32 @@
+.search-bar{
+   height: 80%;
+   background-color: rgba(255, 255, 255, 0.2);
+   display: flex;
+   align-items: center;
+   border-radius: 60px;
+   padding: 10px 20px;
+   width: 100%;
+   max-width: 700px;
+   margin: 10px 20px 10px 20px;
+}
+.search-bar input{
+  background: transparent;
+  flex: 1;
+  border: none;
+  outline: none;
+  color: rgb(195, 194, 202);
+  font-size: 20px;
+}
+
+.search-bar button img{
+   width: 25px;
+}
+
+.search-bar button{
+   border: 0;
+   border-radius: 50%;
+   width: 60px;
+   height: 60px;
+   background-color: rgb(76, 76, 127);
+   cursor: pointer;
+}

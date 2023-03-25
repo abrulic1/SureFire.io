@@ -1,0 +1,30 @@
+.header{
+    background-color: rgb(20, 20, 29);
+    color: rgb(195, 194, 202);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.header h1{
+    margin-left: 20px;
+}
+
+
+img{
+    width: 40px;
+}
+
+button{
+    border: 0;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.images-actions button{
+    margin-right: 20px;
+}
