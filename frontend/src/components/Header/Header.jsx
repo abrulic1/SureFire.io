@@ -1,7 +1,7 @@
 import './Header.css';
-import Search from '../Search';
-import ProfileImage from './images/profile.png';
-import Cart from './images/cart.png'
+import Search from '../Search/Search';
+import ProfileImage from './profile.png';
+import Cart from './cart.png'
 
 const Header = ()=>{
     return (
