@@ -15,7 +15,7 @@ const Header = ()=>{
 
     return (
       <div className="header">
-        <h1>Naslov</h1>
+        <h1>ETHin</h1>
         <Search />
         <NavLinks />
         <button className='menu' onClick={handleClick}>
