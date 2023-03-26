@@ -1,5 +1,5 @@
 .header{
-    background-color: rgb(20, 20, 29);
+    background-color: rgba(0, 0, 0, 0.4);
     color: rgb(195, 194, 202);
     display: flex;
     justify-content: space-between;
@@ -12,19 +12,13 @@
 }
 
 
-img{
-    width: 40px;
-}
-
-button{
-    border: 0;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    background-color: transparent;
+.menu{
+    display: none;
     cursor: pointer;
 }
 
-.images-actions button{
-    margin-right: 20px;
+@media screen and (max-width: 1080px) {
+    .menu{
+      display: block;
+    }
 }

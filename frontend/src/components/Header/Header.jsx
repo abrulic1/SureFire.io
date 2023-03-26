@@ -1,18 +1,27 @@
+import { useState } from 'react';
 import './Header.css';
 import Search from '../Search/Search';
-import ProfileImage from './profile.png';
-import Cart from './cart.png'
+import NavLinks from '../NavLinks/NavLinks';
+import Menu from './menu.png';
+import Close from './close.png';
+import SideDrawer from '../SideDrawer/SideDrawer';
 
 const Header = ()=>{
+  const [isShown, setIsShown] = useState(false);
+
+  const handleClick = () => {
+    setIsShown(currentState => !currentState);
+  }
+
     return (
       <div className="header">
         <h1>Naslov</h1>
         <Search />
-        <div className='images-actions'>
-        <button><img src={ProfileImage} alt="Profile image"></img></button>
-       <button><img src={Cart} alt="Cart image"></img></button>
-        <div className="transactions-picture-button"></div>
-        </div>
+        <NavLinks />
+        <button className='menu' onClick={handleClick}>
+          {isShown ? <img src={Close}></img> : <img src={Menu}></img>}
+        </button>
+        {isShown && (<SideDrawer />)}
       </div>
     );
 }

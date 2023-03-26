@@ -1,0 +1,30 @@
+.images-actions{
+    align-items: center;
+}
+
+.images-actions button{
+    margin-right: 10px;
+}
+
+img{
+    width: 40px;
+}
+
+button{
+    border: 0;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media screen and (max-width: 1080px) {
+    .images-actions{
+      display: none;
+    }
+}
