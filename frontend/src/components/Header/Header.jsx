@@ -18,7 +18,7 @@ const Header = ()=>{
       <div className="header">
         <div className='logo'>
           <img src={EthereumIcon} alt="Ethereum"></img>
-          <h1>ETHin</h1>
+          <h1>SureFire.io</h1>
         </div>
         <Search />
         <NavLinks />

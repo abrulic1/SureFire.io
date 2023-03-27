@@ -18,7 +18,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 1160px) {
     .menu{
       display: block;
     }
