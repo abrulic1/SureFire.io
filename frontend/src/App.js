@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header/Header';
-import SideDrawer from './components/SideDrawer/SideDrawer';
+import { useEffect } from 'react';
 
 
 function App() {
