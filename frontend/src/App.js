@@ -1,12 +1,16 @@
-import './App.css';
+import './App.module.css';
 import Header from './components/Header/Header';
-import { useEffect } from 'react';
-import Home from './Home';
-
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Profile from './components/Profile';
 function App() {
   return (
     <div className="App">
-   <Home />
+      <Router>
+      <Routes>
+      <Route exact path='/' Component={Header}></Route> 
+      <Route  path='/profile' Component={Profile}></Route> 
+   </Routes>
+   </Router>
 </div>
   );
 }

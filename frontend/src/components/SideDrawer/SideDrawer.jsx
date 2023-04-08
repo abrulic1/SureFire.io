@@ -1,4 +1,4 @@
-import './SideDrawer.css';
+import SideDrawerStyles from './SideDrawer.module.css';
 import ProfileImage from '../NavLinks/profile.png';
 import Cart from '../NavLinks/cart.png';
 import Wallet from '../NavLinks/wallet.png';
@@ -6,7 +6,7 @@ import connectWalletHandler from '../../connectWalletHandler';
 
 const SideDrawer = ()=>{
    return (
-   <div className='side-drawer'>
+   <div className={SideDrawerStyles['side-drawer']}>
       <span onClick={connectWalletHandler}>
       <img src={ProfileImage} alt="Profile"></img>
          <h2>Connect with MetaMask</h2>

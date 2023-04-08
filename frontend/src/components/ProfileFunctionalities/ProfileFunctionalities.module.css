@@ -1,0 +1,36 @@
+.functionalities{
+    position: fixed;
+    right: 0;
+    top: 90px; 
+    z-index: 100;
+    height: 50vh;
+    width: 20%;
+    background: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+    margin-right: 20px;
+    margin-top: 10px;
+
+}
+
+.functionalities span{
+    display: flex;
+    padding: 0;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 5px;
+}
+
+span:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+
+.functionalities img{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-left: 15px;
+}

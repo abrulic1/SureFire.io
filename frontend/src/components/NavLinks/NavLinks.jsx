@@ -1,24 +1,32 @@
 import { useState } from 'react';
-import './NavLinks.css';
-import ProfileImage from './profile.png';
+import NavLinksStyles from './NavLinks.module.css';
+import MetaMaskIcon from './profile.png';
+import UserIcon from './user.png';
 import Cart from './cart.png';
 import Wallet from './wallet.png';
 import connectWalletHandler from '../../connectWalletHandler';
 
-const NavLinks = () =>{
+const NavLinks = ({userFunctionalities, setUserFunctionalities}) =>{
     const [isMetaMaskLogoShown, setIsMetaMaskLogoShown] = useState(false);
- 
-    const handleClick = () => {
-        connectWalletHandler();
-        setIsMetaMaskLogoShown( state => state = !state);
-        console.log(isMetaMaskLogoShown);
+    const [profileImage, setProfileImage] = useState(MetaMaskIcon);
+
+    const handleClick = async () => {
+        await connectWalletHandler(isMetaMaskLogoShown, setIsMetaMaskLogoShown);
+        if(isMetaMaskLogoShown) setProfileImage(UserIcon);
+    }
+    const showFunctionalities = ()=>{
+        setUserFunctionalities(true);
     }
 
     return (
-     <div className='images-actions'>
-        <button><img src={ProfileImage} alt="Profile" onClick={handleClick}></img></button>
-        <button><img src={Cart} alt="Cart"></img></button>
-        <button><img src={Wallet} alt="Wallet"></img></button>
+     <div className={NavLinksStyles['images-actions']}>
+        {
+            isMetaMaskLogoShown 
+              ? <button title='Connect with MetaMask'><img src={MetaMaskIcon} alt="Profile" onClick={handleClick}></img></button>
+              :   <button ><img src={UserIcon} alt="Profile" onClick={showFunctionalities}></img></button>
+        }
+        <button title='My Cart'><img src={Cart} alt="Cart"></img></button>
+        <button title='My Wallet'><img src={Wallet} alt="Wallet"></img></button>
      </div>
     )
 };
