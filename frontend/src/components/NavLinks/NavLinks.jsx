@@ -6,9 +6,17 @@ import Wallet from './wallet.png';
 import connectWalletHandler from '../../connectWalletHandler';
 
 const NavLinks = () =>{
+    const [isMetaMaskLogoShown, setIsMetaMaskLogoShown] = useState(false);
+ 
+    const handleClick = () => {
+        connectWalletHandler();
+        setIsMetaMaskLogoShown( state => state = !state);
+        console.log(isMetaMaskLogoShown);
+    }
+
     return (
      <div className='images-actions'>
-        <button><img src={ProfileImage} alt="Profile" onClick={connectWalletHandler}></img></button>
+        <button><img src={ProfileImage} alt="Profile" onClick={handleClick}></img></button>
         <button><img src={Cart} alt="Cart"></img></button>
         <button><img src={Wallet} alt="Wallet"></img></button>
      </div>
