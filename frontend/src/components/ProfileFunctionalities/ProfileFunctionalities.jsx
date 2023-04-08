@@ -24,7 +24,7 @@ const Functionalities = ({userFunctionalities, setUserFunctionalities}) => {
    
       <span onClick={()=>navigate('/myshop')}>
       <img src={Grid} alt="My Shop"></img>
-         <h2>My Shop</h2>
+         <h2>My Collections</h2>
       </span>
       <span onClick={()=>navigate('/wishlist')}>
       <img src={Wishlist} alt="Wishlist"></img>

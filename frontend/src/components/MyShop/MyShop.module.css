@@ -1,0 +1,28 @@
+
+/* .collections{
+} */
+
+.collections h1{
+    color: white;
+    margin-left: 20px;
+}
+
+.collections-cards{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.buttons{
+    border-radius: 2px;
+    margin: 20px;
+    margin-top: 30px;
+}
+
+.buttons button{
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: fit-content;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+}
