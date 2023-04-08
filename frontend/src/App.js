@@ -14,7 +14,7 @@ function App() {
       <Router>
       <Routes>
       <Route exact path='/' Component={Header}></Route> 
-        <Route  path='/profile' Component={Profile}></Route> 
+      <Route path='/profile' Component={Profile}></Route> 
       <Route path='/myshop' Component={MyShop}></Route>
       <Route path='/wishlist' Component={Wishlist}></Route>
       <Route path='/myorders' Component={MyOrders}></Route>

@@ -1,16 +1,21 @@
 
 .profile-card{
     margin-top: 2%;
-    text-align: center;
     width: 60%;
-    /* margin-left: auto;
-    margin-right: auto; */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    min-width: 550px;
 }
 
 .profile-card p{
     color: black;
 }
-
+.image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .image img{
     width: 25%;
     height: 25%;
@@ -20,12 +25,9 @@
     .info{
         padding: 15px 15px 15px 20px;
         margin-top: 10px;
-        text-align: left;
         background-color: rgba(255, 255, 255, 0.1);
         border-radius: 15px;
         font-size: 15px;
-        min-width: 500px;
-        max-width: 1000px;
     }
 
     .info h2{
@@ -37,3 +39,29 @@
         font-weight: 100;
     }
 
+.buttons{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 550px;
+}
+
+.buttons button{
+    background-color: rgba(44, 44, 44, 0.5);
+    border-radius: 2px;
+    border: 2px solid black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+    width: 13%;
+}
+
+.buttons button:hover{
+    background-color: rgba(29, 29, 29, 0.5);
+    border-radius: 2px;
+    border: 2px solid black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+    font-weight: bold;
+    width: 13%;
+}

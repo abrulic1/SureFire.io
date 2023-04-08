@@ -7,8 +7,10 @@ import Close from './close.png';
 import SideDrawer from '../SideDrawer/SideDrawer';
 import Functionalities from '../ProfileFunctionalities/ProfileFunctionalities';
 import EthereumIcon from './ethereum.png';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ()=>{
+  const navigate = useNavigate();
   const [isShown, setIsShown] = useState(false);
   const [userFunctionalities, setUserFunctionalities] = useState(false);
   const handleClick = () => {
@@ -17,7 +19,7 @@ const Header = ()=>{
 
     return (
       <div className={HeaderStyles.header}>
-        <div className={HeaderStyles.logo}>
+        <div className={HeaderStyles.logo} onClick={()=>navigate('/')}>
           <img src={EthereumIcon} alt="Ethereum"></img>
           <h1>SureFire.io</h1>
         </div>
