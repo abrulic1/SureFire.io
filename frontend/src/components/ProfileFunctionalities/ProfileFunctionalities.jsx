@@ -22,15 +22,15 @@ const Functionalities = ({userFunctionalities, setUserFunctionalities}) => {
          <h2>Profile</h2>
       </span>
    
-      <span>
+      <span onClick={()=>navigate('/myshop')}>
       <img src={Grid} alt="My Shop"></img>
          <h2>My Shop</h2>
       </span>
-      <span>
+      <span onClick={()=>navigate('/wishlist')}>
       <img src={Wishlist} alt="Wishlist"></img>
          <h2>Wishlist</h2>
       </span>
-      <span>
+      <span onClick={()=>navigate('/myorders')}>
       <img src={Order} alt="Orders"></img>
          <h2>Orders</h2>
       </span>
