@@ -8,11 +8,13 @@ import SideDrawer from '../SideDrawer/SideDrawer';
 import Functionalities from '../ProfileFunctionalities/ProfileFunctionalities';
 import EthereumIcon from './ethereum.png';
 import { useNavigate } from 'react-router-dom';
+import MyCart from '../MyCart/MyCart';
 
 const Header = ()=>{
   const navigate = useNavigate();
   const [isShown, setIsShown] = useState(false);
   const [userFunctionalities, setUserFunctionalities] = useState(false);
+  const [isCartShown, setIsCartShown] = useState(false);
   const handleClick = () => {
     setIsShown(currentState => !currentState);
   }
@@ -24,12 +26,13 @@ const Header = ()=>{
           <h1>SureFire.io</h1>
         </div>
         <Search />
-        <NavLinks userFunctionalities={userFunctionalities} setUserFunctionalities={setUserFunctionalities}/>
+        <NavLinks userFunctionalities={userFunctionalities} setUserFunctionalities={setUserFunctionalities} setIsCartShown={setIsCartShown}/>
         <button className={HeaderStyles.menu} onClick={handleClick}>
           {isShown ? <img src={Close}></img> : <img src={Menu}></img>}
         </button>
         {isShown && (<SideDrawer />)}
         {userFunctionalities  && <Functionalities userFunctionalities={userFunctionalities} setUserFunctionalities={setUserFunctionalities}/>}
+        {isCartShown && <MyCart setIsCartShown={setIsCartShown}/>}
       </div>
     );
 }
