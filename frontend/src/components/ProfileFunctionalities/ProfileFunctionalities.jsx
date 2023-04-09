@@ -2,7 +2,7 @@ import React from "react";
 import FunctionalitiesStyles from './ProfileFunctionalities.module.css';
 import ProfileImage from '../NavLinks/user.png';
 import Grid from './grid.png';
-import Wishlist from './wishlist.png';
+import Cart from './cart.png';
 import LogOut from './log-out.png';
 import Order from './order.png';
 import {useNavigate} from 'react-router-dom';
@@ -26,14 +26,14 @@ const Functionalities = ({userFunctionalities, setUserFunctionalities}) => {
       <img src={Grid} alt="My Shop"></img>
          <h2>My Collections</h2>
       </span>
-      <span onClick={()=>navigate('/wishlist')}>
-      <img src={Wishlist} alt="Wishlist"></img>
-         <h2>Wishlist</h2>
-      </span>
-      <span onClick={()=>navigate('/myorders')}>
+      {/* <span onClick={()=>navigate('/mycart')}>
+      <img src={Cart} alt="Cart"></img>
+         <h2>My Cart</h2>
+      </span> */}
+      {/* <span onClick={()=>navigate('/myorders')}>
       <img src={Order} alt="Orders"></img>
          <h2>Orders</h2>
-      </span>
+      </span> */}
       <span>
       <img src={LogOut} alt="Log out"></img>
          <h2>Log out</h2>

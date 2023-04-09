@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from 'react-query';
 import ProfileStyles from "./Profile.module.css";
-import ProfileIcon from '../NavLinks/user.png';
+import ProfileIcon from './profile.png';
 import { accountAddress } from "./getAccountAddress";
 import { accountBalance } from "./getAccountBalance";
 import Header from '../Header/Header';
@@ -26,12 +26,13 @@ const Profile =  () => {
                 <h2>Unnamed</h2>
                 <h2>Accout address: <span>{address}</span></h2>
                 <h2>Balance: <span>{balance} ETH</span></h2>
+                <h2>Number of transactions: </h2>
+                <h2>Number of collections: </h2>
             </div>
             <div className={ProfileStyles.buttons}>
-                <button onClick={() => navigate('/myshop')}>Check your shop</button>
-                <button onClick={() => navigate('/myorders')}>Check your orders</button>
-                <button onClick={() => navigate('/wishlist')}>Check your wishlist</button>
-                <button>Check your cart</button>
+                <button onClick={() => navigate('/myshop')}>Check your Collections</button>
+                <button onClick={() => navigate('/mycart')}>Check your Cart</button>
+                {/* <button onClick={() => navigate('/myorders')}>Check your Orders</button> */}
             </div>
        </div>
        </>
