@@ -1,6 +1,8 @@
 .card{
-    width: 400px;
-    height: 500px;
+    width: 30%;
+    max-width: 400px;
+    max-height: 500px;
+    height: 55vh;
     background-image: url('./nft-test.png');
     background-position: center;
     background-repeat: no-repeat;

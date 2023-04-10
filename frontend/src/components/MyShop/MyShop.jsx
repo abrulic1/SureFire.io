@@ -2,7 +2,9 @@ import React from "react";
 import MyShopStyles from "./MyShop.module.css";
 import Header from '../Header/Header';
 import Card from '../Card/Card';
+import { useNavigate } from "react-router-dom";
 const MyShop = () => {
+    const navigate = useNavigate();
     return (
         <>
         <Header />
@@ -18,7 +20,7 @@ const MyShop = () => {
                 <Card />
             </div>
             <div className={MyShopStyles.buttons}>
-                <button>Add new Collection</button>
+                <button onClick={() => navigate('/addcollection')}>Add new Collection</button>
             </div>
         </div>
         </>

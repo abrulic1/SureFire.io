@@ -17,8 +17,8 @@ const MyCart = ({setIsCartShown})=>{
       <div className={MyCartStyles['cart-content']}>
         <h2>Your cart is empty</h2>
     </div>
-    <div className={MyCartStyles.button}>
-        <button className={MyCartStyles['complete-purchase']} disabled>Complete purchase</button>
+    <div className={MyCartStyles.buttons}>
+        <button disabled>Complete purchase</button>
     </div>
   </div>
    )

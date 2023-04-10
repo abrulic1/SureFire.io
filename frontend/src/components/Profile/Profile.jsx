@@ -31,7 +31,7 @@ const Profile =  () => {
             </div>
             <div className={ProfileStyles.buttons}>
                 <button onClick={() => navigate('/myshop')}>Check your Collections</button>
-                <button onClick={() => navigate('/mycart')}>Check your Cart</button>
+                {/* <button onClick={() => navigate('/mycart')}>Check your Cart</button> */}
                 {/* <button onClick={() => navigate('/myorders')}>Check your Orders</button> */}
             </div>
        </div>

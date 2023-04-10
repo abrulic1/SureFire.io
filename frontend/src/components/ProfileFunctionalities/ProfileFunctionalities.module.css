@@ -4,6 +4,7 @@
     top: 90px; 
     z-index: 100;
     height: max-content;
+    min-height: 50vh;
     width: 20%;
     background: white;
     background-color: rgba(0, 0, 0, 0.9);

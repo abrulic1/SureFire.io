@@ -1,14 +1,16 @@
 .side-drawer{
     position: fixed;
-    /* display: flex;
-    flex-direction: column; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     right: 0;
     z-index: 100;
     top: 0;
     margin: 20px;
     height: max-content;
+    min-height: 60vh;
     width: 20%;
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: rgb(0, 0, 0);
     font-size: 15px;
 }
 
@@ -28,21 +30,23 @@
     justify-content: space-evenly;
 }
 
-.complete-purchase{
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    width: max-content;
-    margin-top: 40%;
-    margin-bottom: 10%;
-}
-
-.complete-purchase:hover{
-    background-color: rgba(255, 255, 255, 0.3);
-    scale: 1.1;
-}
-
-.button{
+.buttons{
+    border-radius: 2px;
+    margin: 20px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
+}
+
+.buttons button{
+    border-radius: 5px;
+    background-color: rgb(24, 24, 24);
+    width: fit-content;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.buttons button:hover{
+    background-color: rgb(30, 30, 30);
 }
