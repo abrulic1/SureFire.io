@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const MyShop = () => {
     const navigate = useNavigate();
     return (
+
         <>
         <Header />
         <div className={MyShopStyles.collections}>
@@ -13,14 +14,14 @@ const MyShop = () => {
                    da bude dodano dugme da se kreira u pozadini smart contract,
                    a ako ima da se prikazu svi proizvodi i dugme za dodavanje novih
                 Za svaki proizvod cu morat dodat dalje detaljan prikaz    */}
-            <h1>Your Collections</h1>
+            <h1>Your items</h1>
             <div className={MyShopStyles['collections-cards']}>
-                <Card />
-                <Card />
-                <Card />
+                <Card onClick={() => navigate('/itemid')}/>
+                <Card onClick={() => navigate('/itemid')}/>
+                <Card onClick={() => navigate('/itemid')}/>
             </div>
             <div className={MyShopStyles.buttons}>
-                <button onClick={() => navigate('/addcollection')}>Add new Collection</button>
+                <button onClick={() => navigate('/additem')}>Add new item</button>
             </div>
         </div>
         </>
