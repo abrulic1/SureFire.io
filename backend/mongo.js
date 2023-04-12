@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 const Product = require('./models/product');
 const User = require('./models/role');
 
-const url = 'mongodb+srv://abrulic1:novipass123@cluster0.ji7sq6r.mongodb.net/probaopet?retryWrites=true&w=majority';
+const url = process.env.DB_URL;
 
 mongoose.connect(url).then(()=>{console.log('Connected to database!')})
 .catch(()=>{console.log('Connection failed!')});
@@ -19,7 +20,7 @@ const createProduct = async (req, res, next) => {
 const createUser = async(req, res, next) => {
     const newUser = new User({
         address: req.body.address,
-        shop_address: req.body.shop_address
+        shop: req.body.shop
     });
 
     const result = await newUser.save();
