@@ -5,5 +5,6 @@ const app = express();
 app.use(bodyParser.json());
 
 app.post('/products', mongoPractice.createProduct);
+app.post('/users', mongoPractice.createUser);
 
 app.listen(5000);

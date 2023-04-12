@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Product = require('./models/product');
+const User = require('./models/roles');
 
 const url = 'mongodb+srv://abrulic1:novipass123@cluster0.ji7sq6r.mongodb.net/probaopet?retryWrites=true&w=majority';
 
@@ -15,9 +16,19 @@ const createProduct = async (req, res, next) => {
     res.json(result);
 }
     
+const createUser = async(req, res, next) => {
+    const newUser = new User({
+        address: req.body.address,
+        shop_address: req.body.shop_address
+    });
+
+    const result = await newUser.save();
+    res.json(result);
+}
 const getProducts = async (res, req, next) => {
 
 };
 
 exports.createProduct = createProduct;
 exports.getProducts = getProducts;
+exports.createUser = createUser;
