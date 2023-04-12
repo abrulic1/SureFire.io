@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Product = require('./models/product');
-const User = require('./models/roles');
+const User = require('./models/role');
 
 const url = 'mongodb+srv://abrulic1:novipass123@cluster0.ji7sq6r.mongodb.net/probaopet?retryWrites=true&w=majority';
 
