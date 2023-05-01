@@ -7,23 +7,23 @@ import MyCart from './components/MyCart/MyCart';
 import AddItem from './components/AddItem/AddItem';
 import Item from './components/Item/Item';
 // import MyOrders from './components/MyOrders/MyOrders';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 function App() {
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>
-      <Router>
-      <Routes>
-      <Route exact path='/' Component={Header}></Route> 
-      <Route path='/profile' Component={Profile}></Route> 
-      <Route path='/myshop' Component={MyShop}></Route>
-      <Route path='/mycart' Component={MyCart}></Route>
-      <Route path='/additem' Component={AddItem}></Route>
-      <Route path='itemid' Component={Item}></Route>
-      {/* <Route path='/myorders' Component={MyOrders}></Route> */}
-   </Routes>
-   </Router>
+        <Router>
+          <Routes>
+            <Route exact path='/' Component={Header}></Route> 
+            <Route path='/profile' Component={Profile}></Route> 
+            <Route path='/myshop' Component={MyShop}></Route>
+            <Route path='/mycart' Component={MyCart}></Route>
+            <Route path='/additem' Component={AddItem}></Route>
+            <Route path='itemid' Component={Item}></Route>
+            {/* <Route path='/myorders' Component={MyOrders}></Route> */}
+          </Routes>
+      </Router>
    </QueryClientProvider>
 </div>
   );
