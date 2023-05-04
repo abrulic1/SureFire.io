@@ -89,7 +89,7 @@ module.exports = {
     goerli: {
       provider: () => new HDWalletProvider({
         privateKeys: [process.env.PRIVATE_KEY_1],
-        providerOrUrl: process.env.INFURA_API_URL,
+        providerOrUrl: process.env.INFURA_SEPOLIA_API_URL,
         numberOfAddresses: 1
       }),
       network_id: 5,       // Goerli's id
