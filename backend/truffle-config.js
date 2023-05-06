@@ -22,7 +22,7 @@ module.exports = {
     development: {
       //THIS IS CONNECTED WITH GANACHE (local blockchain), PAY ATTENTION ON PORT 
      host: "127.0.0.1",     // Localhost (default: none)
-     port: 8545,            // Standard Ethereum port (default: none)
+     port: 7545,            // Standard Ethereum port is 8545 but I use Ganache so I changed this port to standard Ganache port which is 7545 (default: none)
      network_id: "*",       // Any network (default: none)
     },
     //
@@ -57,7 +57,8 @@ module.exports = {
         numberOfAddresses: 1
       }),
       network_id: '11155111',
-      gas: 4465030
+      gas: 4465030,
+      total_accounts: 10
     },
     test: {
       provider: function() {

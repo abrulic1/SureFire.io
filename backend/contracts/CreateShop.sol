@@ -25,12 +25,7 @@ contract CreateShop {
     function addProduct(string memory name, string memory description, uint price, uint stock) public onlyOwner() returns (Product memory){
         require(price > 0, "Price must be greater than zero.");
         require(stock > 0, "Amount must be greater than zero.");
-        Product memory newProduct = Product({
-            name: name,
-            description: description,
-            price: price,
-            stock: stock
-        });
+        Product memory newProduct = Product(name, description, price, stock);
         products[productCount++] = newProduct;
         return newProduct;
     }
