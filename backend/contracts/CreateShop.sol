@@ -23,8 +23,16 @@ contract CreateShop {
     }
 
     function addProduct(string memory name, string memory description, uint price, uint stock) public onlyOwner() returns (Product memory){
+        // // Calculate gas cost of the transaction
+        // uint gasCost = gasleft() * tx.gasprice;
+        // // Check if the sender has enough ether to cover gas cost
+        // require(msg.sender.balance >= gasCost, "Not enough ether to cover gas costs.");
         require(price > 0, "Price must be greater than zero.");
         require(stock > 0, "Amount must be greater than zero.");
+        for(uint i=0; i<productCount; i++)
+            if(keccak256(bytes(products[i].name)) == keccak256(bytes(name)))
+             revert("Product with this name already added");
+        
         Product memory newProduct = Product(name, description, price, stock);
         products[productCount++] = newProduct;
         return newProduct;
@@ -46,14 +54,21 @@ contract CreateShop {
         revert("Product not found");
     }
 
-    function purchase(string memory name, uint amount) public payable returns (Product memory){
+
+    function getContractBalance() public view returns (uint) {
+            return address(this).balance;
+        }
+
+
+
+    function purchase(string memory name, uint amount) public payable{
         for (uint i = 0; i < productCount; i++) {
-            if (keccak256(bytes(products[i].name)) == keccak256(bytes(name))) {
-                require(products[i].stock > amount, "There are not enough products with this name!");
+            if (keccak256(abi.encodePacked(products[i].name)) == keccak256(abi.encodePacked(name))) {
+                require(products[i].stock >= amount, "There are not enough products with this name!");
                 require(msg.value >= products[i].price * amount, "Incorrect payment amount!");
                 products[i].stock -= amount;
                 payable(owner).transfer(convertToWei(msg.value));
-                return products[i];
+                return;
               }
             }
             revert("Product not found!");
