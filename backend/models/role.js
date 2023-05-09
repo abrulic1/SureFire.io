@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const roleSchema = new mongoose.Schema({
-    address: {type: String, required: true, unique: true},
-    shop: {type: String, unique: true, default: null},
-    buyer: {type: Boolean, default: true},
-    seller: {type: Boolean, default: false}
-})
+  address: {type: mongoose.Types.ObjectId, required: true, ref: 'User'},
+  shop: { type: String, unique: true, default: null },
+  buyer: { type: Boolean, default: true },
+  seller: { type: Boolean, default: false },
+});
 
-module.exports = mongoose.model('Role', roleSchema);
+module.exports = mongoose.model("Role", roleSchema);

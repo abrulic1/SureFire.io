@@ -1,0 +1,14 @@
+[
+    {
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/af/Glasses_black.jpg",    
+        "name": "Glasses",
+        "price": 0.5,
+        "owner": ""
+    },
+    {
+        "image": "https://cdn.shopify.com/s/files/1/0600/0141/9429/products/mkk8rbos1irj5lrwk2bg_34c32152-3fb7-4d63-85ed-278599be0348.jpg?v=1678825385",    
+        "name": "UNO Cards",
+        "price": 1,
+        "owner": ""
+    }
+]
