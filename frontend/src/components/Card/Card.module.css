@@ -3,22 +3,11 @@
     max-width: 400px;
     max-height: 500px;
     height: 55vh;
-    background-image: url('./nft-test.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-
-.card h1{
-    background-color: rgba(0, 0, 0, 0.65);
-    margin: 0;
-    padding: 12px;
-    text-align: center;
-}
 
 .card:hover{
     transform: scale(1.05);

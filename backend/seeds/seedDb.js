@@ -34,7 +34,7 @@ const roles = [
 
 
 const DbConnection = async () => {
-    if (mongoose.connections[0].readyState) return;
+    // if (mongoose.connections[0].readyState) return;
 
     mongoose
     .connect(process.env.DB_URL)
@@ -63,12 +63,21 @@ const DbConnection = async () => {
                         {
                             "image": "https://upload.wikimedia.org/wikipedia/commons/a/af/Glasses_black.jpg",
                             "name": "Glasses",
+                            "normalizedName": "GLASSES",
                             "price": 0.5,
                             "owner": foundUser
                         },
                         {
-                            "image": "https://cdn.shopify.com/s/files/1/0600/0141/9429/products/mkk8rbos1irj5lrwk2bg_34c32152-3fb7-4d63-85ed-278599be0348.jpg?v=1678825385",
+                            "image": "https://upload.wikimedia.org/wikipedia/commons/a/af/Glasses_black.jpg",
                             "name": "UNO Cards",
+                            "normalizedName": "UNO CARDS",
+                            "price": 1,
+                            "owner": foundUser
+                        },
+                        {
+                            "image": "https://www.energysistem.com/cdnassets/products/45305/principal_2000.jpg",
+                            "name": "Headphones",
+                            "normalizedName": "HEADPHONES",
                             "price": 1,
                             "owner": foundUser
                         }
@@ -87,7 +96,7 @@ const DbConnection = async () => {
                     await UserOrder.insertMany([]);
 
                   // Disconnect from the database when done
-                    mongoose.disconnect();
+                 //  mongoose.disconnect();
                     console.log("Disconnected!");
                 }).catch(err => { throw err });
                 2
