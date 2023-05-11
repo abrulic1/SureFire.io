@@ -10,9 +10,12 @@ const web3 = new Web3('http://localhost:8545');
 app.use(bodyParser.json());
 const { options } = require('./swagger');
 
- require('./utils/mongo-seed');
+//  require('./utils/mongo-seed');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)));
+
+const { DbConnection } = require('./seeds/seedDb');
+ DbConnection();
 
 /**
  * @swagger

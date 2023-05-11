@@ -1,15 +1,23 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require('mongoose-unique-validator');
 
 const transactionSchema = new mongoose.Schema(
   {
-    id: { type: String, required: true, unique: true },
-    from: { type: String, required: true },
-    to: { type: String, required: true },
-    status: { type: String, required: true, default: "Success" },
+    id: { type: String, required: true, unique: true }
+    // from: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'User',
+    //   required: true
+    // },
+    // to: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'User',
+    //   required: true
+    // }
   },
   { timestamps: true }
 );
 
-const Transaction = mongoose.models.transaction || mongoose.model("Transaction", transactionSchema);
 
-module.exports = {Transaction};
+transactionSchema.plugin(uniqueValidator);
+module.exports = mongoose.model('Transaction', transactionSchema);
