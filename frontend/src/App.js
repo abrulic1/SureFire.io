@@ -21,7 +21,7 @@ function App() {
       <Route path='/myshop' Component={MyShop}></Route>
       <Route path='/mycart' Component={MyCart}></Route>
       <Route path='/additem' Component={AddItem}></Route>
-      <Route path='itemid' Component={Item}></Route>
+      <Route path='/product' Component={Item} query='id'></Route>
       {/* <Route path='/myorders' Component={MyOrders}></Route> */}
    </Routes>
    </Router>

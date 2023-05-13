@@ -1,6 +1,5 @@
 import React from "react";
 import CardStyles from './Card.module.css';
-import { useEffect } from "react";
 
 const Card = (props) => {
   const cardStyle = {

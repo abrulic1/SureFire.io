@@ -33,7 +33,20 @@ router.get('/', async (req, res) => {
     res.json(products);
 })
 
-
+router.get('/products/:id', async (req, res) => {
+    try {
+      const product = await Product.findById(req.params.id);
+      if (!product) {
+        return res.status(404).json({ error: 'Product not found' });
+      }
+        res.json(product);
+        console.log("Uslo na rutu gdje se dohvaca product preko id-a")
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Server error' });
+    }
+});
+  
 router.get('/products/', async (req, res, next) => {
     const name = (req.query.name).toUpperCase();
     console.log("ime je: ", name)
@@ -49,6 +62,7 @@ router.get('/products/:name', (req, res, next) => {
     console.log('Get route in products to get products by name from PARAMS');
     res.json({ place }); 
 });
+
 
 
 module.exports = router;
