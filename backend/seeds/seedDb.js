@@ -61,21 +61,35 @@ const DbConnection = async () => {
 
                     const products = [
                         {
-                            "image": "https://upload.wikimedia.org/wikipedia/commons/a/af/Glasses_black.jpg",
+                            "image": "https://miro.medium.com/v2/resize:fit:670/0*iXFSD9fZ-AD73K3P.jpg",
                             "name": "Glasses",
                             "normalizedName": "GLASSES",
                             "price": 0.5,
                             "owner": foundUser
                         },
                         {
-                            "image": "https://upload.wikimedia.org/wikipedia/commons/a/af/Glasses_black.jpg",
+                            "image": "https://gibbonsgazette.org/wp-content/uploads/2022/04/43YAWLITTZJLZIQTCP2JSS4KSM.jpg",
                             "name": "UNO Cards",
                             "normalizedName": "UNO CARDS",
                             "price": 1,
                             "owner": foundUser
                         },
                         {
-                            "image": "https://www.energysistem.com/cdnassets/products/45305/principal_2000.jpg",
+                            "image": "https://www.marketsmithinc.com/wp-content/uploads/2022/05/latest-1.jpg",
+                            "name": "Headphones",
+                            "normalizedName": "HEADPHONES",
+                            "price": 1,
+                            "owner": foundUser
+                        },
+                        {
+                            "image": "https://theithacan.org/wp-content/uploads/2022/02/2.8-Cartoon_MikeRoss-3.jpg",
+                            "name": "Headphones",
+                            "normalizedName": "HEADPHONES",
+                            "price": 1,
+                            "owner": foundUser
+                        },
+                        {
+                            "image": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/in/wp-content/uploads/2022/03/monkey-g412399084_1280.jpg",
                             "name": "Headphones",
                             "normalizedName": "HEADPHONES",
                             "price": 1,

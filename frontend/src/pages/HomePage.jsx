@@ -19,10 +19,16 @@ const HomePage = () => {
         fetchFun();
     }, []);
 
+    const handleDataFromChild = (data) => {
+        setResponse(data);
+        console.log("DATA IZ HOMEPAGEA JE: ", data);
+    };
+    
     return (
         <>
-            <Header />
+            <Header sendDataToParent={handleDataFromChild} />
             <div className={HomePageStyles.products}>
+                {console.log("PROIZVODIDIDIDIDIIDID TIP: ", typeof response)}
                 {response.map(product => (
                     <Card key={product._id} image={product.image} price={product.price} />
                 ))}
