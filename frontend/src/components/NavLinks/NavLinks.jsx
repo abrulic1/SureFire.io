@@ -4,8 +4,7 @@ import MetaMaskIcon from './profile.png';
 import UserIcon from './user.png';
 import Cart from './cart.png';
 import Wallet from './wallet.png';
-import connectWalletHandler from '../../connectWalletHandler';
-import MyCart from '../MyCart/MyCart';
+import connectWalletHandler from '../../utils/connectWalletHandler';
 
 const NavLinks = ({userFunctionalities, setUserFunctionalities, setIsCartShown}) =>{
     const [isMetaMaskLogoShown, setIsMetaMaskLogoShown] = useState(false);

@@ -7,10 +7,10 @@ const connectToDb = async () => {
   mongoose
     .connect(process.env.DB_URL)
     .then((res) => {
-      console.log("Connected to mongoDB connectToDb.js file");
+      console.log("Connected to mongoDB /utils/connectToDb.js!");
     })
     .catch((error) => {
-      console.log('DESIO SE ERROR U KONEKCIJI');
+      console.log('Error: Unable to connect to database!');
       throw error;
     });
 };

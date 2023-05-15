@@ -109,9 +109,7 @@ const DbConnection = async () => {
                     await UserOrder.deleteMany({});
                     await UserOrder.insertMany([]);
 
-                  // Disconnect from the database when done
-                 //  mongoose.disconnect();
-                    console.log("Disconnected!");
+                    console.log("Seeding database finished!");
                 }).catch(err => { throw err });
                 2
                 

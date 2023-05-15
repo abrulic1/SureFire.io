@@ -3,38 +3,52 @@ import Header from '../components/Header/Header';
 import Card from '../components/Card/Card';
 import HomePageStyles from './HomePage.module.css';
 import { useNavigate } from 'react-router-dom';
+import { fetchProducts } from '../services/product-service';
+import { QueryClient, useQuery } from 'react-query';
+const queryClient = new QueryClient();
+
 
 const HomePage = () => {
     const navigate = useNavigate();
-    const [response, setResponse] = useState([]);
+    const [products, setProducts] = useState([]);
+    const { isError, isSuccess, isLoading, data, error } = useQuery(["products"], fetchProducts, { staleTime: 6000 });
 
     useEffect(() => {
-        const fetchFun = async () => {
-            try {
-                const res = await fetch(`http://localhost:5000/api/products/`);
-                const data = await res.json();
-                setResponse(data);
-            } catch (error) {
-                console.log(error);
-            }
+        console.log("Component rendering...");
+        setProducts(data);
+        // You can directly use the data returned from useQuery
+        if (isSuccess) {
+          console.log("Products:", data);
         }
-        fetchFun();
-    }, []);
+      }, [isSuccess, data]);
 
-    const handleDataFromChild = (data) => {
-        setResponse(data);
-        console.log("DATA IZ HOMEPAGEA JE: ", data);
+    if (isLoading)
+    {
+        console.log("Loading...")
+     return <div>Loading...</div>   
+    }
+
+    if (isError)
+    {
+        console.log("Error...")
+     return <div>Error...</div>   
+    }
+    const handleDataFromChild = (newData) => {
+        // setResponse(data);
+        setProducts(newData);
+        // data = newData;
+        // console.log("DATA IZ HOMEPAGEA JE: ", data);
     };
     
     return (
         <>
             <Header sendDataToParent={handleDataFromChild} />
-            <div className={HomePageStyles.products}>
-                {console.log("PROIZVODIDIDIDIDIIDID TIP: ", typeof response)}
-                {response.map(product => (
-                    <Card key={product._id} image={product.image} price={product.price} onClick={ ()=>navigate(`/product?id=${product._id}`)} />
-                ))}
-            </div>
+            {products && (
+                <div className={HomePageStyles.products}>
+                    {products.map(product => (
+                        <Card key={product._id} image={product.image} price={product.price} onClick={() => navigate(`/product?id=${product._id}`)} />
+                    ))}
+                </div>)}
         </>
     )
 };

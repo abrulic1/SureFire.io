@@ -1,10 +1,13 @@
-body{
+body {
   /* background-color: rgb(28, 28, 40); */
-  background: #16222A;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #1d1010, #0d1419);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #1d1010, #0d1419); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-   
-} 
+  background: #16222A;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #1d1010, #0d1419);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #1d1010, #0d1419);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
 
 .App {
   align-items: center;
@@ -40,6 +43,7 @@ background: linear-gradient(to right, #1d1010, #0d1419); /* W3C, IE 10+/ Edge, F
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

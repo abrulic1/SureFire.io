@@ -2,7 +2,7 @@ import SideDrawerStyles from './SideDrawer.module.css';
 import ProfileImage from '../NavLinks/profile.png';
 import Cart from '../NavLinks/cart.png';
 import Wallet from '../NavLinks/wallet.png';
-import connectWalletHandler from '../../connectWalletHandler';
+import connectWalletHandler from '../../utils/connectWalletHandler';
 
 const SideDrawer = ()=>{
    return (
