@@ -15,7 +15,7 @@ const Item = () => {
 
     useEffect(() => {
         const fetchItem = async () => {
-            const response = await fetch(`http://localhost:5000/api/products/products/${encodeURIComponent(id)}`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/products/products/${encodeURIComponent(id)}`);
             const data = await response.json();
             console.log("RESPONSE DATA ISsssssssssss: ", data);
             setItem(data);
@@ -49,7 +49,7 @@ const Item = () => {
                             <h3>Current Price</h3>
                             <h2>{item.price} ETH</h2>
                             <div className={ItemStyles.buttons}>
-                                <button onClick={handleBuyNowButtonClick}>Buy now</button>
+                                <button onClick={handleBuyNowButtonClick(id, item.price, item.owner)}>Buy now</button>
                                 <button>Cart</button>
                             </div>
                         </div>
@@ -61,47 +61,35 @@ const Item = () => {
             {showModal && (
                 <div className={ItemStyles.modal}>
                     <div className={ItemStyles['modal-content']}>
-                        <h2>You have to confirm this purchase</h2>
+                        <h2>Confirm purchase</h2>
                         <div>
-                            <div>
-                                <h2>owner:</h2>
-                                <p>{item.owner}</p>
-                            </div>
-                            <div>
-                                <h2>product name:</h2>
+                        <div>
+                                <h2>Product:</h2>
                                 <p>{item.name}</p>
                             </div>
                             <div>
-                                <h2>description:</h2>
-                                <p>No description available</p>
-                            </div>
-                            <div>
-                                <h2>contract:</h2>
+                                <h2>Owned by:</h2>
                                 <p>{item.owner}</p>
                             </div>
                             <div>
-                                <h2>price:</h2>
+                                <h2>Product description:</h2>
+                                <p>No description available</p>
+                            </div>
+                            <div>
+                                <h2>Contract:</h2>
+                                <p>{item.owner}</p>
+                            </div>
+                            <div>
+                                <h2>Price:</h2>
                                 <p>{item.price}</p>
                             </div>
                             <div>
-                                <h2>amount:</h2>
-                                <p>1</p>
-                            </div>
-                            <div>
-                                <h2>amount:</h2>
-                                <p>1</p>
-                            </div>
-                            <div>
-                                <h2>amount:</h2>
-                                <p>1</p>
-                            </div>
-                            <div>
-                                <h2>amount:</h2>
+                                <h2>Amount:</h2>
                                 <p>1</p>
                             </div>
                         </div>
                         <div className={ItemStyles.modalButtons}>
-                            <button onClick={() => handleBuyNowClick(item.owner)}>Yes</button>
+                            {/* <button onClick={handleBuyNowClick(item.owner)}>Yes</button> */}
                             <button onClick={handleModalCloseClick}>No</button>
                         </div>
                     </div>

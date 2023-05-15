@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const { DbConnection } = require('./seeds/seedDb');
 DbConnection();
 const productRoutes = require('./routes/product-routes');
-
+const shopRoutes = require('./routes/shop-routes');
 const app = express();
 
 app.use(bodyParser.json());
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/products/', productRoutes);
-
+// app.use('/api/shops/', shopRoutes);
 /*
 const router = express.Router();
 

@@ -1,4 +1,6 @@
-const handleBuyNowClick = async (owner) => {
+const purchaseProduct = require('../utils/interactWithSol');
+
+const handleBuyNowClick = async (productId, price, owner) => {
     console.log("handleBUynowClick");
     //if user is not connected with metamask, there we have to connect
     //if user is connected, than we have to check can user buy this product 
@@ -8,6 +10,7 @@ const handleBuyNowClick = async (owner) => {
           const userAddress = window.ethereum.selectedAddress;
             console.log(`User is connected with address ${userAddress}`);
             //Ovdje sad trebam da mi otvori modal i da provjeri stanje na accountu... 
+          // purchaseProduct(productId, price, userAddress);
         } else {
           // User is not connected to Metamask or has not authorized your app
             console.log('User is not connected with Metamask');

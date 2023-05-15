@@ -11,7 +11,7 @@ const HomePage = () => {
     useEffect(() => {
         const fetchFun = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/api/products/`);
+                const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/products/`);
                 const data = await res.json();
                 setResponse(data);
             } catch (error) {
