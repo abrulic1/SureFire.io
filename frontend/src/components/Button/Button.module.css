@@ -1,0 +1,41 @@
+.button-dark{
+    border-radius: 5px;
+    background-color: rgb(214, 214, 214);
+    width: max-content;
+    font-weight: bold;
+    padding: 10px;
+    color: black;
+    margin: 5px;
+    height: max-content;
+    font-size: 1vw;
+    font-weight: 300;
+}
+
+.button-dark:hover{
+    background-color: rgb(185, 185, 185);
+}
+
+.button-dark:active{
+    background-color: rgb(155, 155, 155);
+}
+
+.button-light, .button-light:hover, .button-light:active{
+    border-radius: 5px;
+    background-color: rgb(24, 24, 24);
+    width: max-content;
+    font-weight: bold;
+    padding: 10px;
+    color: white;
+    margin: 5px;
+    height: max-content;
+    font-size: 1vw;
+    font-weight: 300;
+}
+
+.button-light:hover{
+    background-color: rgb(40, 40, 40);
+}
+
+.button-light:active{
+    background-color: rgb(120, 120, 120);
+}

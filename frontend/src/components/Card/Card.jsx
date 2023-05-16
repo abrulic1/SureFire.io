@@ -15,7 +15,7 @@ const Card = (props) => {
       <div className={CardStyles.image} style={cardStyle}>
       </div>
         <div className={CardStyles.description}>
-          <h2>PRICE: { props.price }</h2>
+          <h2>PRICE: { props.price } ETH</h2>
       </div>
     </div>
     )

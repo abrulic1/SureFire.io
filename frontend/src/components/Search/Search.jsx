@@ -21,7 +21,12 @@ const Search = ({sendDataToParent})=>{
 
   return (
         <div className={SearchStyles['search-bar']}>
-        <input type="text" placeholder="Search items" onChange={(e) => setSearchQuery(e.target.value)}/>
+      <input type="text" placeholder="Search items" onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={(event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          fetchFun();
+        }
+    }}/>
         <button type='submit'><img src={SearchIcon} alt="Search" onClick={()=>{fetchFun()}}></img></button>
       </div>
     )

@@ -1,56 +1,48 @@
 import React, { useState } from "react";
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from "react";
 import ItemStyles from './Item.module.css';
 import { handleBuyNowClick } from './handleBuyNowClick';
 import Header from '../Header/Header';
+import { fetchProductById } from "../../services/product-service";
+import { useQuery } from 'react-query';
+import Button from "../Button/Button";
+
 const Item = () => {
-    console.log("KOMONENTA SE RENDERUJE");
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('id');
-    const [item, setItem] = useState(null);
-    const [showModal, setShowModal] = useState(false); // Add state for modal visibility
+    const [showModal, setShowModal] = useState(false);
+    const { isError, isSuccess, isLoading, data, error } = useQuery(["productById", id], () => fetchProductById(id), { staleTime: 6000 });
 
-    useEffect(() => {
-        const fetchItem = async () => {
-            const response = await fetch(`http://localhost:5000/api/products/products/${encodeURIComponent(id)}`);
-            const data = await response.json();
-            console.log("RESPONSE DATA ISsssssssssss: ", data);
-            setItem(data);
-        }
-        fetchItem();
-    }, []);
 
     const handleBuyNowButtonClick = () => {
-        // Open the modal
         setShowModal(true);
     }
 
     const handleModalCloseClick = () => {
-        // Close the modal
         setShowModal(false);
     }
 
     return (
         <div>
-            <Header />
-            <h1>PRODUCT DETAILS</h1>
-            {item && (
+            <h1 style={{marginTop: '2vw'}}>PRODUCT DETAILS</h1>
+            {data && (
                 <div className={ItemStyles.content}>
                     <div className={ItemStyles.image}>
-                        <img src={item.image}></img>
+                        <img src={data.image}></img>
                     </div>
                     <div className={ItemStyles.details}>
-                        <h2>{item.name}</h2>
-                        <h3>Owned by: {item.owner}</h3>
+                        <h2>{data.name}</h2>
+                        <h3>Owned by: {data.owner}</h3>
                         <div className={ItemStyles.price}>
                             <h3>Current Price</h3>
-                            <h2>{item.price} ETH</h2>
+                            <h2>{data.price} ETH</h2>
                             <div className={ItemStyles.buttons}>
-                                <button onClick={handleBuyNowButtonClick}>Buy now</button>
-                                <button>Cart</button>
+                                <Button mode="dark" onClick={handleBuyNowButtonClick} text="Buy now" style={{ margin: '0px', borderTopRightRadius: '0px', borderBottomRightRadius: '0px' }} />
+                                <Button mode="dark" text="Cart" style={{
+                                    margin: '0px', borderTopLeftRadius: '0px', borderBottomLeftRadius: '0px', borderLeft: '1px solid black'
+                                }} />
                             </div>
                         </div>
                         <h2>Description</h2>
@@ -61,48 +53,36 @@ const Item = () => {
             {showModal && (
                 <div className={ItemStyles.modal}>
                     <div className={ItemStyles['modal-content']}>
-                        <h2>You have to confirm this purchase</h2>
+                        <h1>This product will be added to your cart</h1>
                         <div>
-                            <div>
-                                <h2>owner:</h2>
-                                <p>{item.owner}</p>
-                            </div>
-                            <div>
+                            <span>
                                 <h2>product name:</h2>
-                                <p>{item.name}</p>
-                            </div>
-                            <div>
+                                <h2>{data.name}</h2>
+                            </span>
+                            <span>
+                                <h2>owner:</h2>
+                                <h2>{data.owner}</h2>
+                            </span>
+                            <span>
                                 <h2>description:</h2>
-                                <p>No description available</p>
-                            </div>
-                            <div>
+                                <h2>No description available</h2>
+                            </span>
+                            <span>
                                 <h2>contract:</h2>
-                                <p>{item.owner}</p>
-                            </div>
-                            <div>
+                                <h2>{data.owner}</h2>
+                            </span>
+                            <span className={ItemStyles['span-price']}>
                                 <h2>price:</h2>
-                                <p>{item.price}</p>
-                            </div>
-                            <div>
+                                <h2>{data.price} ETH</h2>
+                            </span>
+                            <span>
                                 <h2>amount:</h2>
-                                <p>1</p>
-                            </div>
-                            <div>
-                                <h2>amount:</h2>
-                                <p>1</p>
-                            </div>
-                            <div>
-                                <h2>amount:</h2>
-                                <p>1</p>
-                            </div>
-                            <div>
-                                <h2>amount:</h2>
-                                <p>1</p>
-                            </div>
+                                <h2>1</h2>
+                            </span>
                         </div>
                         <div className={ItemStyles.modalButtons}>
-                            <button onClick={() => handleBuyNowClick(item.owner)}>Yes</button>
-                            <button onClick={handleModalCloseClick}>No</button>
+                            <Button mode="dark" onClick={handleModalCloseClick} text="No" />
+                            <Button onClick={() => handleBuyNowClick(data.owner)} text="Yes" />
                         </div>
                     </div>
                 </div>

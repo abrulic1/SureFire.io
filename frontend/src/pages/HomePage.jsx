@@ -25,7 +25,7 @@ const HomePage = () => {
     if (isLoading)
     {
         console.log("Loading...")
-     return <div>Loading...</div>   
+     return (<div>Loading...</div>)   
     }
 
     if (isError)
@@ -34,10 +34,7 @@ const HomePage = () => {
      return <div>Error...</div>   
     }
     const handleDataFromChild = (newData) => {
-        // setResponse(data);
         setProducts(newData);
-        // data = newData;
-        // console.log("DATA IZ HOMEPAGEA JE: ", data);
     };
     
     return (
