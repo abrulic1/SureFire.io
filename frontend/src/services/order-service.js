@@ -1,8 +1,8 @@
 import { getUserByAddress } from "./user-service";
 
-export const getOrderByUser = async (user) => {
+export const getOrderByUserId = async (userId) => {
     try {
-        const response = await fetch(`http://localhost:5000/api/orders/order/${encodeURIComponent(user)}`);
+        const response = await fetch(`http://localhost:5000/api/orders/order/${encodeURIComponent(userId)}`);
         const data = await response.json();
         return data;
     } catch (error) {
@@ -20,17 +20,6 @@ export const addOrder = async (userAddress, id) => {
         product: id,
     };
     
-    const order = await getOrderByUser(user);
-    if (order) {
-        order.product.push(id);
-        updateOrder(order);
-    }
-    else
-        insertOrder(orderData);
-};
-
-
-const insertOrder = async (orderData) => {
     try {
         const res = await fetch(`http://localhost:5000/api/orders/order`, {
             method: 'POST',
@@ -43,4 +32,4 @@ const insertOrder = async (orderData) => {
     } catch (error) {
         console.log(error);
     }
-}
+};

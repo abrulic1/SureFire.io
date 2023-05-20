@@ -6,7 +6,7 @@ connectToDb();
 
 
 router.post('/order', orderController.addOrder);
-router.get('/order/:user_id', orderController.getOrderByUser);
+router.get('/order/:user_id', orderController.getOrderByUserId);
 // router.post('/orders/:user_id', orderController.updateOrder);
 
 module.exports = router;

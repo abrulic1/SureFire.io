@@ -1,4 +1,4 @@
-import { addOrder } from "../../services/user_order-service";
+import { addOrder } from "../../services/order-service";
 
 export const handleBuyNowClick = async (owner, id) => {
     console.log("handleBUynowClick");

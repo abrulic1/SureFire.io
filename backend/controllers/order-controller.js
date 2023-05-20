@@ -22,7 +22,7 @@ const addOrder = async (req, res) => {
 //     console.log("Pozvana ruta iz order controllera za update narudzbe");
 // }
 
-const getOrderByUser = async (req, res) => {
+const getOrderByUserId = async (req, res) => {
     try {
         const order = await Order.find({ user: req.params.user_id });
         if (order.length == 0) {
@@ -37,4 +37,4 @@ const getOrderByUser = async (req, res) => {
 }
 
 exports.addOrder = addOrder;
-exports.getOrderByUser = getOrderByUser;
+exports.getOrderByUserId = getOrderByUserId;
