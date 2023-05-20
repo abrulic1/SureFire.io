@@ -7,7 +7,8 @@ const bodyParser = require('body-parser');
 const { DbConnection } = require('./seeds/seedDb');
 DbConnection();
 const productRoutes = require('./routes/product-routes');
-
+const orderRoutes = require('./routes/order-routes');
+const userRoutes = require('./routes/user-routes');
 const app = express();
 
 app.use(bodyParser.json());
@@ -15,12 +16,14 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requsted-Witth, Content-Type, Accept, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   next();
 
 })
 
 app.use('/api/products/', productRoutes);
+app.use('/api/orders/', orderRoutes);
+app.use('/api/users/', userRoutes);
 
 /*
 const router = express.Router();

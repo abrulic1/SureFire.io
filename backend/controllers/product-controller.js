@@ -7,7 +7,9 @@ const getAllProducts = async (req, res) => {
     res.json(products);
 }
 
+
 const getProductById = async (req, res) => {
+    console.log("getProductById")
     try {
         const product = await Product.findById(req.params.id);
         if (!product) {
@@ -15,8 +17,8 @@ const getProductById = async (req, res) => {
         }
         res.json(product);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Server error' });
+        console.error(err.reason);
+        res.status(500).send('Not valid params. Check console for more information');
     }
 };
 

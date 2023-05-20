@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-const userOrdersSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         unique: true,
-        required: true
+        require: true
     },
     product: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',
-        required: true
+        require: true
     }]
 })
 
 
-userOrdersSchema.plugin(uniqueValidator);
-module.exports = mongoose.model('User_Orders', userOrdersSchema);
+orderSchema.plugin(uniqueValidator);
+module.exports = mongoose.model('Order', orderSchema);

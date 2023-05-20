@@ -7,9 +7,10 @@ connectToDb();
 
 router.get('/', productController.getAllProducts);
 
-router.get('/products/:id', productController.getProductById);
+router.get('/product/:id', productController.getProductById);
   
 
+/*
 router.get('/products/', async (req, res, next) => {
     const name = (req.query.name).toUpperCase();
     console.log("ime je: ", name)
@@ -18,6 +19,7 @@ router.get('/products/', async (req, res, next) => {
     console.log('Get route in products to get products by name from QUERY');
     res.json({ products });
 });
+*/
 
 
 module.exports = router;
