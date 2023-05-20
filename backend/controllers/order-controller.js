@@ -18,9 +18,6 @@ const addOrder = async (req, res) => {
     })
 };
 
-// const updateOrder = async (req, res) => {
-//     console.log("Pozvana ruta iz order controllera za update narudzbe");
-// }
 
 const getOrderByUserId = async (req, res) => {
     try {
@@ -36,5 +33,24 @@ const getOrderByUserId = async (req, res) => {
     }
 }
 
+
+const updateOrder = async (req, res) => {
+    try {
+      const order = await Order.findById(req.params.order_id);
+      if (!order) {
+        return res.status(404).json({ Error: 'Order not found' });
+      }
+  
+    order.product.push(req.body.product_id);
+    await order.save();
+        res.status(200).json(order);
+        
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ Error: 'Server error' });
+  }
+};
+  
 exports.addOrder = addOrder;
 exports.getOrderByUserId = getOrderByUserId;
+exports.updateOrder = updateOrder;
