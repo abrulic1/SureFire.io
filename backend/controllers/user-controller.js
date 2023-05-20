@@ -16,5 +16,16 @@ const getUserByAddress = async (req, res) => {
     }
 };
 
+const getById = async (user_id) => {
+    try {
+        const user = await User.findById(user_id);
+        return user;
+      } catch (err) {
+        console.error(err);
+        throw new Error('Error retrieving user by ID');
+      }
+}
+
 
 exports.getUserByAddress = getUserByAddress;
+exports.getById = getById;

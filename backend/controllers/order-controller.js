@@ -1,4 +1,5 @@
 const Order = require('../models/order');
+const userController = require('./user-controller');
 
 const addOrder = async (req, res) => {
     const { user, product } = req.body;
@@ -51,6 +52,22 @@ const updateOrder = async (req, res) => {
   }
 };
   
+const getUserOrders = async (req, res) => {
+    try {
+      const user = await userController.getById(req.params.user_id);
+      if (!user) {
+        return res.status(404).json({ error: 'User with this ID doesn\'t have any orders' });
+      }
+  
+      const orders = await Order.find({ user: req.params.user_id });
+      res.status(200).json(orders);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ Error: 'Server error' });
+    }
+};
+  
 exports.addOrder = addOrder;
 exports.getOrderByUserId = getOrderByUserId;
 exports.updateOrder = updateOrder;
+exports.getUserOrders = getUserOrders;
