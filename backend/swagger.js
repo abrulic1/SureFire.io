@@ -11,9 +11,9 @@ const options = {
           url: 'http://localhost:5000',
           description: 'Development server',
         },
-      ],
+    ],
     },
-    apis: ['./index.js'],
+    apis: ['./routes/*.js'], // Path to the API route files
 };
   
 module.exports = { options };
