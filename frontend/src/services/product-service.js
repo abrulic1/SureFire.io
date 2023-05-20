@@ -12,7 +12,7 @@ export const fetchProducts = async () => {
 
 export const fetchProductById = async (id) => {
     try {
-        const response = await fetch(`http://localhost:5000/api/products/products/${encodeURIComponent(id)}`);
+        const response = await fetch(`http://localhost:5000/api/products/product/${encodeURIComponent(id)}`);
         const data = await response.json();
         return data;
     } catch (error) {

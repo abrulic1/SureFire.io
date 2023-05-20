@@ -10,8 +10,8 @@ router.get('/', productController.getAllProducts);
 router.get('/product/:id', productController.getProductById);
   
 
-/*
-router.get('/products/', async (req, res, next) => {
+
+router.get('/product/', async (req, res, next) => {
     const name = (req.query.name).toUpperCase();
     console.log("ime je: ", name)
     const products = await Product.find({ normalizedName: name });
@@ -19,7 +19,7 @@ router.get('/products/', async (req, res, next) => {
     console.log('Get route in products to get products by name from QUERY');
     res.json({ products });
 });
-*/
+
 
 
 module.exports = router;

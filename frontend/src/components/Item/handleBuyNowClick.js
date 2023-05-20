@@ -1,4 +1,6 @@
-const handleBuyNowClick = async (owner) => {
+import { addOrder } from "../../services/user_order-service";
+
+export const handleBuyNowClick = async (owner, id) => {
     console.log("handleBUynowClick");
     //if user is not connected with metamask, there we have to connect
     //if user is connected, than we have to check can user buy this product 
@@ -6,8 +8,10 @@ const handleBuyNowClick = async (owner) => {
         if (window.ethereum && window.ethereum.selectedAddress) {
           // User is connected to Metamask and has authorized your app
           const userAddress = window.ethereum.selectedAddress;
-            console.log(`User is connected with address ${userAddress}`);
-            //Ovdje sad trebam da mi otvori modal i da provjeri stanje na accountu... 
+          console.log(`User is connected with address ${userAddress}`);
+  
+          alert("Confirm adding this product to your cart");
+          addOrder(userAddress, id);
         } else {
           // User is not connected to Metamask or has not authorized your app
             console.log('User is not connected with Metamask');
@@ -25,5 +29,3 @@ const handleBuyNowClick = async (owner) => {
         // Provide fallback behavior
       }
 }
-
-module.exports = { handleBuyNowClick };

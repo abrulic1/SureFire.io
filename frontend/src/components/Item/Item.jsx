@@ -13,7 +13,7 @@ const Item = () => {
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('id');
     const [showModal, setShowModal] = useState(false);
-    const { isError, isSuccess, isLoading, data, error } = useQuery(["productById", id], () => fetchProductById(id), { staleTime: 6000 });
+    const { isError, isSuccess, isLoading, data, error } = useQuery(["productById", id], () => fetchProductById(id), { staleTime: 60000 });
 
 
     const handleBuyNowButtonClick = () => {
@@ -82,7 +82,10 @@ const Item = () => {
                         </div>
                         <div className={ItemStyles.modalButtons}>
                             <Button mode="dark" onClick={handleModalCloseClick} text="No" />
-                            <Button onClick={() => handleBuyNowClick(data.owner)} text="Yes" />
+                            <Button onClick={() => {
+                                handleBuyNowClick(data.owner, id);
+                                handleModalCloseClick();
+                            }} text="Yes" />
                         </div>
                     </div>
                 </div>
