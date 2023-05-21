@@ -11,7 +11,7 @@ export const getOrderByUserId = async (userId) => {
 }
 
 
-export const addOrder = async (userAddress, id) => {
+export const makeOrder = async (userAddress, id) => {
     const user = await getUserByAddress(userAddress);
     //NOTE 1: The method on the backend uses 'find' method from the mongoose library, which returns an array, and since we only
     // have one user that will be returned, then we take the first element of that array(first user)
@@ -21,6 +21,16 @@ export const addOrder = async (userAddress, id) => {
         product: [id],
     };
 
+    const hasOrder = await getOrderByUserId(user[0]._id);
+    if (!hasOrder)
+        return addOrder(orderData);
+
+    else
+        return updateOrder(hasOrder[0]._id, id);
+};
+
+
+const addOrder = async (orderData) => {
     try {
         const res = await fetch(`http://localhost:5000/api/orders/order`, {
             method: 'POST',
@@ -33,4 +43,27 @@ export const addOrder = async (userAddress, id) => {
     } catch (error) {
         console.log(error);
     }
-};
+}
+
+const updateOrder = async (orderId, productId) => {
+    try {
+        const response = await fetch(`http://localhost:5000/api/orders/order/${orderId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ product_id: productId }),
+        });
+    
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.Error || 'Server error');
+        }
+    
+        const updatedOrder = await response.json();
+        return updatedOrder;
+      } catch (err) {
+        console.error(err);
+        throw err;
+      }
+}

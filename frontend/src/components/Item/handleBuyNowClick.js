@@ -1,4 +1,4 @@
-import { addOrder } from "../../services/order-service";
+import { makeOrder } from "../../services/order-service";
 
 export const handleBuyNowClick = async (owner, id) => {
     console.log("handleBUynowClick");
@@ -11,7 +11,8 @@ export const handleBuyNowClick = async (owner, id) => {
           console.log(`User is connected with address ${userAddress}`);
   
           alert("Confirm adding this product to your cart");
-          addOrder(userAddress, id);
+          makeOrder(userAddress, id);
+          
         } else {
           // User is not connected to Metamask or has not authorized your app
             console.log('User is not connected with Metamask');
