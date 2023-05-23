@@ -22,7 +22,29 @@ const getProductById = async (req, res) => {
     }
 };
 
+const addProduct = async (req, res) => {
+    console.log("addProduct route");
+    try {
+        const { image, name, price, owner } = req.body;
 
+        const newProduct = new Product({
+            image,
+            name,
+            normalizedName: name.toUpperCase(),
+            price,
+            owner
+        });
+
+        await newProduct.save();
+
+        return res.status(201).json({ success: true, product: newProduct });
+    } catch (error) {
+        console.log('Cannot save the product to the database.');
+        console.log(error);
+        return res.status(500).json({ success: false, message: 'Failed to add the product.' });
+    }
+}
 
 exports.getAllProducts = getAllProducts;
 exports.getProductById = getProductById;
+exports.addProduct = addProduct;

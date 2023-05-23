@@ -44,7 +44,6 @@ router.get('/', productController.getAllProducts);
 
 router.get('/product/:id', productController.getProductById);
 
-
 router.get('/product/', async (req, res, next) => {
     const name = (req.query.name).toUpperCase();
     console.log("ime je: ", name)
@@ -54,6 +53,8 @@ router.get('/product/', async (req, res, next) => {
     res.json({ products });
 });
 
+
+router.post('/add-product', productController.addProduct);
 
 
 module.exports = router;

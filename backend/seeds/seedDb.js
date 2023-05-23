@@ -7,6 +7,8 @@ const Shop = require('../models/shop');
 const Transaction = require('../models/transaction');
 const Order = require('../models/order');
 const UserRole = require('../models/user_role');
+const Contract = require('../models/contract');
+const { contractABI } = require('../utils/compileContract');
 
 const url = process.env.DB_URL;
 const users = [
@@ -111,11 +113,17 @@ const DbConnection = async () => {
                     await UserRole.insertMany([]);
                     await Order.deleteMany({});
                     const userId = await User.findOne({}, '_id');
-                    console.log("USERIDDIDIDIIDIDID ", userId);
                     const productId =await Product.findOne({}, '_id');
                     await Order.insertMany([{
                         user: userId,
                         product: productId
+                    }]);
+                    await Contract.deleteMany({});
+                    await Contract.insertMany([{
+                        owner: process.env.OWNER_PUBLIC_KEY,
+                        address: process.env.CONTRACT_ADDRESS,
+                        abi: contractABI,
+                        admins: [process.env.OWNER_PUBLIC_KEY]
                     }]);
 
 

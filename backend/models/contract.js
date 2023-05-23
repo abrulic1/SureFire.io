@@ -3,8 +3,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 const contractSchema = new mongoose.Schema({
     owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        type: String,
         unique: true,
         require: true
     },
@@ -16,6 +15,19 @@ const contractSchema = new mongoose.Schema({
     abi: {
         type: Object,
         require: true
+    },
+    admins: {
+        type: [{
+            type: String,
+            required: true,
+            unique: true
+        }],
+        validate: {
+            validator: function(arr) {
+                return arr.length === new Set(arr).size;
+            },
+            message: 'Admins array must contain unique values.'
+        }
     }
 })
 
