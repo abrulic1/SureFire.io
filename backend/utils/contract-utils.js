@@ -1,6 +1,5 @@
 const Contract = require('../models/contract');
 
-
 const getByOwner = async (owner) => {
     try {
         const contract = await Contract.findOne({ owner });
@@ -11,6 +10,5 @@ const getByOwner = async (owner) => {
         console.error(err);
     }
 }
-
 
 exports.getByOwner = getByOwner;

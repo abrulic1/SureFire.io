@@ -9,7 +9,6 @@ contract CreateShop {
     uint public adminCount = 1;  //owner added
     struct Product {
         string name;
-        string description;
         uint price;
         uint stock;
         address owner;
@@ -43,7 +42,7 @@ contract CreateShop {
         adminCount--;
     }
 
-    function addProduct(string memory name, string memory description, uint price, uint stock) public onlyOwnerOrAdmin() returns (Product memory) {
+    function addProduct(string memory name, uint price, uint stock) public onlyOwnerOrAdmin() returns (Product memory) {
         require(price > 0, "Price must be greater than zero.");
         require(stock > 0, "Amount must be greater than zero.");
         for (uint i = 0; i < productCount; i++) {
@@ -51,7 +50,7 @@ contract CreateShop {
                 revert("Product with this name already added");
         }
 
-        Product memory newProduct = Product(name, description, price, stock, msg.sender);
+        Product memory newProduct = Product(name, price, stock, msg.sender);
         products[productCount++] = newProduct;
         return newProduct;
     }

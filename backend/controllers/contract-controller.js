@@ -1,21 +1,7 @@
-const Web3 = require('web3');
 const Contract = require('../models/contract');
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-
-let web3;
-
-if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
-  // Browser with MetaMask
-  web3 = new Web3(window.ethereum);
-  window.ethereum.enable();
-} else {
-  // Non-browser environment, use truffle-hdwallet-provider
-  const provider = new HDWalletProvider(process.env.PRIVATE_KEY_1, process.env.INFURA_SEPOLIA_API_URL);
-  web3 = new Web3(provider);
-}
-
 const userUtils = require('../utils/user-utils');
 const contractUtils = require('../utils/contract-utils');
+const { web3 } = require('../utils/interact-with-Ethereum');
 
 const createShop = async (req, res) => {
   try {
@@ -23,10 +9,11 @@ const createShop = async (req, res) => {
     const shop = new web3.eth.Contract(contract.abi, contract.address);
 
     const admin = await userUtils.getById(req.body.id);
-    const accounts = await web3.eth.getAccounts();
+    // const accounts = await web3.eth.getAccounts();
 
-    console.log("aacccccc ", accounts);
-    await shop.methods.addAdmin(admin.address).send({ from: accounts[0] });
+    //OVO TAKODJER U TRY CATCH....
+    // console.log("aacccccc ", accounts);
+    await shop.methods.addAdmin(admin.address).send({ from: process.env.OWNER_PUBLIC_KEY });
 
     //ovdje bi bilo dobro napravit da se vrate etheri owneru jer ovako on placa svako kreiranje novog admina......
     try {
@@ -48,5 +35,7 @@ const createShop = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to create shop.' });
   }
 };
+
+
 
 exports.createShop = createShop;

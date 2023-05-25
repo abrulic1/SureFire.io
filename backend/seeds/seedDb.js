@@ -23,6 +23,9 @@ const users = [
     },
     {
         "address": "0x9f5d0535cc0d2b02672978c560d0e28c6c5ba663"
+    },
+    {
+        "address": "0x75f53f5b7cB06AAFb05A09ac7cEF0FfF9c2Fef89"
     }
 ];
 const roles = [
@@ -69,35 +72,35 @@ const DbConnection = async () => {
                             "image": "https://miro.medium.com/v2/resize:fit:670/0*iXFSD9fZ-AD73K3P.jpg",
                             "name": "Glasses",
                             "normalizedName": "GLASSES",
-                            "price": 0.5,
-                            "owner": foundUser
+                            "owner": foundUser,
+                            "description": "Very cute glasses"
                         },
                         {
                             "image": "https://gibbonsgazette.org/wp-content/uploads/2022/04/43YAWLITTZJLZIQTCP2JSS4KSM.jpg",
                             "name": "UNO Cards",
                             "normalizedName": "UNO CARDS",
-                            "price": 1,
-                            "owner": foundUser
+                            "owner": foundUser,
+                            "description": "Some desc"
                         },
                         {
                             "image": "https://www.marketsmithinc.com/wp-content/uploads/2022/05/latest-1.jpg",
                             "name": "Headphones",
                             "normalizedName": "HEADPHONES",
-                            "price": 1,
-                            "owner": foundUser
+                            "owner": foundUser,
+                            "description": "Descriptiooon"
                         },
                         {
                             "image": "https://theithacan.org/wp-content/uploads/2022/02/2.8-Cartoon_MikeRoss-3.jpg",
                             "name": "Headphones",
                             "normalizedName": "HEADPHONES",
-                            "price": 1,
-                            "owner": foundUser
+                            "owner": foundUser,
+                            "description": "Descriptiooon"
+
                         },
                         {
                             "image": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/in/wp-content/uploads/2022/03/monkey-g412399084_1280.jpg",
                             "name": "Headphones",
                             "normalizedName": "HEADPHONES",
-                            "price": 1,
                             "owner": foundUser
                         }
                     ];
