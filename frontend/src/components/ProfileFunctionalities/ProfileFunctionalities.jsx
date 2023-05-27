@@ -41,10 +41,10 @@ const Functionalities = ({userFunctionalities, setUserFunctionalities}) => {
       <img src={Grid} alt="My Shop"></img>
          <h2>My shop</h2>
       </span>
-      <span onClick={()=>navigate('/mycart')}>
+      {/* <span onClick={()=>navigate('/mycart')}>
       <img src={Cart} alt="Cart"></img>
          <h2>My Orders</h2>
-      </span>
+      </span> */}
       <span>
       <img src={LogOut} alt="Log out"></img>
          <h2>Log out</h2>

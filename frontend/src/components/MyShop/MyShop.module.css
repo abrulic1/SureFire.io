@@ -32,3 +32,10 @@
 .buttons button:hover{
     background-color: rgb(30, 30, 30);
 }
+
+.products-not-found{
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

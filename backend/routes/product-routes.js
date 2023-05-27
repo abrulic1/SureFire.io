@@ -53,9 +53,8 @@ router.get('/product/', async (req, res, next) => {
     res.json({ products });
 });
 
-
+router.get('/:owner_address', productController.getProductsByOwnerAddress);
 router.post('/add-product', productController.addProduct);
-
 router.post('/:id/purchase', productController.purchaseProduct);
 
 

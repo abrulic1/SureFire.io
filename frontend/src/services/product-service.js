@@ -21,3 +21,16 @@ export const fetchProductById = async (id) => {
     console.log(error);
   }
 };
+
+
+export const getProductsByOwnerAddress = async (address) => {
+  try {
+    const response = await fetch(
+      `${BE_URL}/products/${encodeURIComponent(address)}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}

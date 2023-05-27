@@ -82,7 +82,22 @@ const purchaseProduct = async (req, res) => {
     }
 }
 
+const getProductsByOwnerAddress = async (req, res) => {
+    try {
+        const user = await userUtils.getByAddress(req.params.owner_address);
+        const products = await Product.find({ owner: user._id});
+        if (!products) {
+            return res.status(404).json({ error: 'This user doesnt have any products!' });
+        }
+        res.json(products);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Not valid params. Check console for more information');
+    }
+}
+
 exports.getAllProducts = getAllProducts;
 exports.getProductById = getProductById;
 exports.addProduct = addProduct;
 exports.purchaseProduct = purchaseProduct;
+exports.getProductsByOwnerAddress = getProductsByOwnerAddress;
