@@ -13,19 +13,19 @@ const { contractABI } = require('../utils/compileContract');
 const url = process.env.DB_URL;
 const users = [
     {
-        "address": "0x2cc4f4A8615DD8e24ec9E45f29077E0c645B8191"
+        "address": '0x2cc4f4A8615DD8e24ec9E45f29077E0c645B8191'
     },
     {
-        "address": "0xa2A170731f4b66b95a680550d2fF97d11D8B7572"
+        "address": '0xa2A170731f4b66b95a680550d2fF97d11D8B7572'
     },
     {
-        "address": "0x9f20cb346Ce1402ACCA0a1Fa3d26FC0DfE2D3F03"
+        "address": '0x9f20cb346Ce1402ACCA0a1Fa3d26FC0DfE2D3F03'
     },
     {
-        "address": "0x9f5d0535cc0d2b02672978c560d0e28c6c5ba663"
+        "address": '0x9f5d0535cc0d2b02672978c560d0e28c6c5ba663'
     },
     {
-        "address": "0x75f53f5b7cB06AAFb05A09ac7cEF0FfF9c2Fef89"
+        "address": '0x75f53f5b7cB06AAFb05A09ac7cEF0FfF9c2Fef89'
     }
 ];
 const roles = [
@@ -119,7 +119,7 @@ const DbConnection = async () => {
                     const productId =await Product.findOne({}, '_id');
                     await Order.insertMany([{
                         user: userId,
-                        product: productId
+                        products: productId
                     }]);
                     await Contract.deleteMany({});
                     await Contract.insertMany([{

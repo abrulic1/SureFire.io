@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = new mongoose.Schema({
-  address: { type: String, unique: true, required: true }
+  address: { type: String, unique: true, require: true }
 });
 
 userSchema.plugin(uniqueValidator);

@@ -6,7 +6,7 @@ const addOrder = async (req, res) => {
     console.log("addOrder");
     const newOrder = new Order({
         user: user,
-        product: product
+        products: product
     });
 
     await Order.create(newOrder).then(savedOrder => {
@@ -22,8 +22,8 @@ const addOrder = async (req, res) => {
 
 const getOrderByUserId = async (req, res) => {
     try {
-        const order = await Order.find({ user: req.params.user_id });
-        if (order.length == 0) {
+        const order = await Order.findOne({ user: req.params.user_id });
+        if (order == 0) {
            return res.status(404).send("Order for this user not found");
         }
         res.status(200).send(order);
@@ -34,7 +34,6 @@ const getOrderByUserId = async (req, res) => {
     }
 }
 
-
 const updateOrder = async (req, res) => {
     try {
       const order = await Order.findById(req.params.order_id);
@@ -42,7 +41,7 @@ const updateOrder = async (req, res) => {
         return res.status(404).json({ Error: 'Order not found' });
       }
   
-    order.product.push(req.body.product_id);
+    order.products.push(req.body.product_id);
     await order.save();
         res.status(200).json(order);
         
@@ -54,12 +53,14 @@ const updateOrder = async (req, res) => {
   
 const getUserOrders = async (req, res) => {
     try {
-      const user = await userController.getById(req.params.user_id);
-      if (!user) {
-        return res.status(404).json({ error: 'User with this ID doesn\'t have any orders' });
-      }
+      // const user = await userController.getById(req.params.user_id);
+      // console.log("user ovdje je: ", user);
+      // if (!user) {
+      //   return res.status(404).json({ error: 'User with this ID doesn\'t have any orders' });
+      // }
   
-      const orders = await Order.find({ user: req.params.user_id });
+      const orders = await Order.findOne({ user: req.params.user_id });
+      console.log("orororoorr ", orders);
       res.status(200).json(orders);
     } catch (err) {
       console.error(err);
@@ -67,7 +68,19 @@ const getUserOrders = async (req, res) => {
     }
 };
   
+
+// const getAllOrders = async (req, res) => {
+//   try {
+//     const orders = await Order.find();
+//     res.status(200).json(orders);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ Error: 'Server error' });
+//   }
+// }
+
 exports.addOrder = addOrder;
 exports.getOrderByUserId = getOrderByUserId;
 exports.updateOrder = updateOrder;
 exports.getUserOrders = getUserOrders;
+// exports.getAllOrders = getAllOrders;
