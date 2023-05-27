@@ -1,10 +1,13 @@
 .header{
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.9);
     color: rgb(195, 194, 202);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+    position: fixed;
+    width: 100%;
+    z-index: 100;
 }
 
 .logo{
@@ -20,8 +23,8 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1160px) {
+/* @media screen and (max-width: 1160px) {
     .menu{
       display: block;
     }
-}
+} */

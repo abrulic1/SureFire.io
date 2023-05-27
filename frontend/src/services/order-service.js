@@ -19,14 +19,27 @@ export const makeOrder = async (userAddress, id) => {
   // have one user that will be returned, then we take the first element of that array(first user)
   //NOTE 2: It would be better approach to use 'findOne' or similar method to return only one user
   const orderData = {
-    user: user[0]._id,
+    user: user._id,
     product: [id],
   };
 
-  const hasOrder = await getOrderByUserId(user[0]._id);
+  const hasOrder = await getOrderByUserId(user._id);
   if (!hasOrder) return addOrder(orderData);
-  else return updateOrder(hasOrder[0]._id, id);
+  else return updateOrder(hasOrder._id, id);
 };
+
+export const getUserOrders = async (userAddress) => {
+  const user = await getUserByAddress(userAddress);
+  try {
+    const response = await fetch(
+      `${BE_URL}/orders/${encodeURIComponent(user._id)}/orders`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 const addOrder = async (orderData) => {
   try {

@@ -1,6 +1,71 @@
+
+  .slideshow{
+    top: 100px;
+   margin-left: auto;
+   margin-right: auto;
+    justify-content: space-around;
+    position: relative;
+    height: 85vh;
+    width: 95%;
+    background-color: black;
+    margin-bottom: 150px;
+  }
+
+  .slideshow img{
+   width: 100%;
+   height: 100%;
+   background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+    object-position: center;
+    opacity: 0.7;
+   
+  }
+
 .products{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding: 20px;
 }
+  
+
+.textOverlay {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 15px;
+    padding: 15px 25px 15px 25px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: rgb(236, 236, 236);
+    font-size: 20px;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .buttonOverlay {
+    background-color: black;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+  }
+
+
+  .buttonOverlay{
+    width: max-content;
+    padding: 20px 40px;
+    font-weight: bold;
+    font-size: large;
+  }
+
+  /* h2{
+    color: white;
+    margin: 10px;
+    margin-left: 40px;
+    font-size: 30px;
+  } */

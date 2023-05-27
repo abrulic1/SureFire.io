@@ -1,49 +1,60 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavLinksStyles from "./NavLinks.module.css";
-import MetaMaskIcon from "./profile.png";
-import UserIcon from "./user.png";
-import Cart from "./cart.png";
-import Wallet from "./wallet.png";
-import connectWalletHandler from "../../utils/connectWalletHandler";
-
+import Cart from "./cart2.png";
+import connectWalletHandler from '../../utils/connectWalletHandler';
+import ProfileIcon from './acc.png';
 const NavLinks = ({ setUserFunctionalities, setIsCartShown }) => {
-  const [isMetaMaskLogoShown, setIsMetaMaskLogoShown] = useState(false);
-  const [, setProfileImage] = useState(MetaMaskIcon);
-  const [, setAccountAddress] = useState(""); // [
+  const [isConnected, setIsConnected] = useState(false);
+  const [balance, setBalance] = useState(localStorage.getItem("balance") || 0);
+  const [account, setAccount] = useState(localStorage.getItem("account") || null);
 
-  const handleClick = async () => {
-    const response = await connectWalletHandler(
-      isMetaMaskLogoShown,
-      setIsMetaMaskLogoShown
-    );
-    setAccountAddress(response);
-    if (isMetaMaskLogoShown) setProfileImage(UserIcon);
-  };
-  const showFunctionalities = () => {
-    setUserFunctionalities(true);
-  };
+  useEffect(() => {
+    if (account) {
+      setIsConnected(true);
+    }
+  }, [account]);
 
+  useEffect(() => {
+    localStorage.setItem("balance", balance);
+  }, [balance]);
+  
+  
   const showCart = () => {
     setIsCartShown(true);
   };
 
+  const handleConnectWallet = async () => {
+    const connectedAccount = await connectWalletHandler(setIsConnected, setBalance);
+    setAccount(connectedAccount);
+    localStorage.setItem("account", connectedAccount);
+  };
+  
+  const showFunctionalities = () => {
+    setUserFunctionalities(true);
+  };
+
   return (
     <div className={NavLinksStyles["images-actions"]}>
-      {isMetaMaskLogoShown ? (
-        <button title="Connect with MetaMask">
-          <img src={MetaMaskIcon} alt="Profile" onClick={handleClick}></img>
+      {!isConnected ? (
+        <button
+          title="Connect with MetaMask"
+          className={NavLinksStyles.connect}
+          onClick={handleConnectWallet}
+        >
+          Connect with MetaMask
         </button>
       ) : (
-        <button>
-          <img src={UserIcon} alt="Profile" onClick={showFunctionalities}></img>
-        </button>
+          <>
+        <button title="Balance" className={NavLinksStyles.balance}>
+          {balance} ETH
+          </button>
+            <button className={NavLinksStyles.profile} title="Profile">
+              <img src={ProfileIcon} onClick={showFunctionalities} />
+            </button>
+            </>
       )}
-      {/* <button title='Connect with MetaMask'><img src={MetaMaskIcon} alt="Profile" onClick={handleClick}></img></button> */}
       <button title="My Cart">
-        <img src={Cart} alt="Cart" onClick={showCart}></img>
-      </button>
-      <button title="My Wallet">
-        <img src={Wallet} alt="Wallet"></img>
+        <img src={Cart} alt="Cart" onClick={showCart} />
       </button>
     </div>
   );

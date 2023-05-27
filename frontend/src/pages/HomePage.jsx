@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Header from "../components/Header/Header";
 import Card from "../components/Card/Card";
 import HomePageStyles from "./HomePage.module.css";
@@ -8,6 +8,8 @@ import { useQuery } from "react-query";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [buttonState, setButtonState] = useState(false);
+  const exploreProductsRef = useRef(null);
   const {
     isError,
     isLoading,
@@ -22,19 +24,55 @@ const HomePage = () => {
     return <div>Error...</div>;
   }
 
+  const handleExploreProducts = () => {
+    setButtonState(true);
+    setTimeout(() => {
+      exploreProductsRef.current.scrollIntoView({ behavior: "smooth" });
+    }, 0);
+  };
+
   return (
     <>
       <Header sendDataToParent={() => {}} />
-      {products && (
-        <div className={HomePageStyles.products}>
-          {products.map((product) => (
-            <Card
-              key={product._id}
-              image={product.image}
-              price={product.price}
-              onClick={() => navigate(`/product?id=${product._id}`)}
-            />
-          ))}
+      <div className={HomePageStyles.slideshow}>
+        <img src="https://media.wired.com/photos/622bde93d53a49d05c484009/16:9/w_2400,h_1350,c_limit/NFTs-Don't-Work-They-Way-You-Think-Gear-1239020052.jpg" alt="Slideshow" />
+        <div className={HomePageStyles.textOverlay}>
+          <h2>Universal MarketSquare</h2>
+          <h3>Empowering the Web3 Community</h3>
+        </div>
+        <button className={HomePageStyles.buttonOverlay} onClick={handleExploreProducts}>
+          Explore Products
+        </button>
+      </div>
+      {products  && (
+        <div ref={exploreProductsRef}>
+          <h2>Explore Products</h2>
+          <div className={HomePageStyles.products}>
+            {products.map((product) => (
+              <Card
+                key={product._id}
+                image={product.image}
+                price={product.price}
+                onClick={() => navigate(`/product?id=${product._id}`)}
+              />
+            ))}
+             {products.map((product) => (
+              <Card
+                key={product._id}
+                image={product.image}
+                price={product.price}
+                onClick={() => navigate(`/product?id=${product._id}`)}
+              />
+             ))}
+             {products.map((product) => (
+              <Card
+                key={product._id}
+                image={product.image}
+                price={product.price}
+                onClick={() => navigate(`/product?id=${product._id}`)}
+              />
+            ))}
+          </div>
         </div>
       )}
     </>

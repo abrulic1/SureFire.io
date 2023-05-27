@@ -1,7 +1,8 @@
 import { makeOrder } from "../../services/order-service";
 
 export const handleBuyNowClick = async (owner, id) => {
-    console.log("handleBUynowClick");
+  console.log("handleBUynowClick");
+  console.log("owner i id: ", owner, " ", id);
     //if user is not connected with metamask, there we have to connect
     //if user is connected, than we have to check can user buy this product 
     try {
