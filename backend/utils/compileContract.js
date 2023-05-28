@@ -32,7 +32,7 @@ const contractData = compiledContract.contracts['CreateShop.sol'][contractName];
 
 
 contractABI = contractData.abi;
-contractBytecode =  contractData.evm.bytecode.object;
+contractBytecode = contractData.evm.bytecode.object;
 
 module.exports = {
     contractABI,

@@ -10,7 +10,6 @@ const UserRole = require('../models/user_role');
 const Contract = require('../models/contract');
 const { contractABI } = require('../utils/compileContract');
 
-const url = process.env.DB_URL;
 const users = [
     {
         "address": '0x2cc4f4A8615DD8e24ec9E45f29077E0c645B8191'
@@ -28,6 +27,7 @@ const users = [
         "address": '0x75f53f5b7cB06AAFb05A09ac7cEF0FfF9c2Fef89'
     }
 ];
+
 const roles = [
     {
         "name": "Seller",
@@ -39,8 +39,6 @@ const roles = [
     }
 ];
 
-
-
 const DbConnection = async () => {
     // if (mongoose.connections[0].readyState) return;
 
@@ -51,15 +49,9 @@ const DbConnection = async () => {
             // mongoose.connection.db.dropDatabase();
 
             await User.deleteMany({});
-            //  console.log("Useri uspjesno obrisani!")
             User.insertMany(users).then(insertedUsers => {
-                console.log(`Inserted ${insertedUsers.length} users`);
-
-                // Find a user by _id
-                const userId = insertedUsers[0]._id;
+                const userId = insertedUsers[3]._id;
                 User.findById(userId).then(async foundUser => {
-                    console.log(`Found user: ${foundUser}`);
-
                     const shops = [
                         {
                             "address": "0xa399b55B84f06381322278AD384F1B05C1088287",
@@ -72,28 +64,28 @@ const DbConnection = async () => {
                             "image": "https://miro.medium.com/v2/resize:fit:670/0*iXFSD9fZ-AD73K3P.jpg",
                             "name": "Glasses",
                             "normalizedName": "GLASSES",
-                            "owner": foundUser,
+                            "owner": foundUser._id,
                             "description": "Very cute glasses"
                         },
                         {
                             "image": "https://gibbonsgazette.org/wp-content/uploads/2022/04/43YAWLITTZJLZIQTCP2JSS4KSM.jpg",
                             "name": "UNO Cards",
                             "normalizedName": "UNO CARDS",
-                            "owner": foundUser,
+                            "owner": foundUser._id,
                             "description": "Some desc"
                         },
                         {
                             "image": "https://www.marketsmithinc.com/wp-content/uploads/2022/05/latest-1.jpg",
                             "name": "Headphones",
                             "normalizedName": "HEADPHONES",
-                            "owner": foundUser,
+                            "owner": foundUser._id,
                             "description": "Descriptiooon"
                         },
                         {
                             "image": "https://theithacan.org/wp-content/uploads/2022/02/2.8-Cartoon_MikeRoss-3.jpg",
                             "name": "Headphones",
                             "normalizedName": "HEADPHONES",
-                            "owner": foundUser,
+                            "owner": foundUser._id,
                             "description": "Descriptiooon"
 
                         },
@@ -101,7 +93,7 @@ const DbConnection = async () => {
                             "image": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/in/wp-content/uploads/2022/03/monkey-g412399084_1280.jpg",
                             "name": "Headphones",
                             "normalizedName": "HEADPHONES",
-                            "owner": foundUser
+                            "owner": foundUser._id
                         }
                     ];
                     await Role.deleteMany({});
@@ -110,13 +102,14 @@ const DbConnection = async () => {
                     await Shop.insertMany(shops);
                     await Product.deleteMany({});
                     await Product.insertMany(products);
+                    //BITNO: Ove sve proizvode moram dodati i na Ethereum
                     await Transaction.deleteMany({});
                     await Transaction.insertMany([]);
                     await UserRole.deleteMany({});
                     await UserRole.insertMany([]);
                     await Order.deleteMany({});
                     const userId = await User.findOne({}, '_id');
-                    const productId =await Product.findOne({}, '_id');
+                    const productId = await Product.findOne({}, '_id');
                     await Order.insertMany([{
                         user: userId,
                         products: productId
@@ -132,8 +125,6 @@ const DbConnection = async () => {
 
                     console.log("Seeding database finished!");
                 }).catch(err => { throw err });
-                2
-
             }).
                 catch(err => console.log(err));
         })

@@ -48,7 +48,6 @@ const addOrder = async (orderData) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(orderData),
     });
-    console.log("Adding order..");
     const data = await res.json();
     return data;
   } catch (error) {

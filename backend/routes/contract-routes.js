@@ -5,4 +5,5 @@ const { connectToDb } = require('../utils/connectToDb');
 connectToDb();
 
 router.post('/create-shop', contractController.createShop);
+router.post('/add-admin', contractController.addAdmin);
 module.exports = router;

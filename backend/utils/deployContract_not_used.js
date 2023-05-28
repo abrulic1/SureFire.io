@@ -1,4 +1,4 @@
-const { contractABI, contractBytecode } = require('../utils/compileContract');
+const { contractABI, contractBytecode } = require('./compileContract');
 const Web3 = require('web3');
 // const EthereumTx = require('ethereumjs-tx').Transaction;
 const Contract = require('../models/contract');

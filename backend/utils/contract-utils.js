@@ -6,7 +6,6 @@ const getByOwner = async (owner) => {
         return contract;
     }
     catch (err) {
-        console.log("Unable to get contract by owner from db");
         console.error(err);
     }
 }

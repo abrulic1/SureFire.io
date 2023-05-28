@@ -55,7 +55,7 @@ router.get('/product/', async (req, res, next) => {
 
 router.get('/:owner_address', productController.getProductsByOwnerAddress);
 router.post('/add-product', productController.addProduct);
-router.post('/:id/purchase', productController.purchaseProduct);
+router.post('/:product_id/purchase', productController.purchaseProduct);
 
 
 module.exports = router;

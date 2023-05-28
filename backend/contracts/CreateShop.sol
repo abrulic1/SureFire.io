@@ -42,12 +42,16 @@ contract CreateShop {
         adminCount--;
     }
 
+    event AddProductFailed(string message);
+
     function addProduct(string memory name, uint price, uint stock) public onlyOwnerOrAdmin() returns (Product memory) {
         require(price > 0, "Price must be greater than zero.");
         require(stock > 0, "Amount must be greater than zero.");
         for (uint i = 0; i < productCount; i++) {
-            if (keccak256(bytes(products[i].name)) == keccak256(bytes(name)))
+            if (keccak256(bytes(products[i].name)) == keccak256(bytes(name))){
+                emit AddProductFailed("Product with this name already added");
                 revert("Product with this name already added");
+            }
         }
 
         Product memory newProduct = Product(name, price, stock, msg.sender);

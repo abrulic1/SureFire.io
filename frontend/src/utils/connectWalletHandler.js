@@ -18,7 +18,6 @@ const connectWalletHandler = async (setIsConnected, setBalance) => {
       alert(error.message);
     }
   } else {
-    // MetaMask not installed
     alert("Please install MetaMask");
   }
 };
