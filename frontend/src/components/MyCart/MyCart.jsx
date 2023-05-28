@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 import { useEffect, useState } from 'react';
 import { fetchProductById } from '../../services/product-service';
 import Button from '../Button/Button';
-import { buyNowClick } from '../../utils/buyNowClick';
+import { purchaseProduct } from '../../services/product-service';
 
 const MyCart = ({ setIsCartShown }) => {
   const closeCart = () => {
@@ -54,7 +54,7 @@ const MyCart = ({ setIsCartShown }) => {
               <img src={product.image}></img>
                 <h2>{product.name}</h2>
                 </span>
-              <Button mode='dark' text="Buy" onClick={ () => buyNowClick(product._id, localStorage.getItem('account')) } />
+              <Button mode='dark' text="Buy" onClick={ () => purchaseProduct(product._id, localStorage.getItem('account')) } />
             </div>
           ))
         ) : (

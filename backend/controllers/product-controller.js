@@ -1,6 +1,6 @@
 const Product = require('../models/product');
 const userUtils = require('../utils/user-utils');
-
+const contractUtils = require('../utils/contract-utils');
 
 const getAllProducts = async (req, res) => {
     const products = await Product.find();
@@ -45,13 +45,15 @@ const addProduct = async (req, res) => {
 
 
 const purchaseProduct = async (req, res) => {
-    //Iz params dobijam id proizvoda, iz querya trenutnog usera 
     try {
-        //BITNO: Treba provjera da li je proizvod na stanju ..... Nakon toga ga izbacit i sa Ethereuma i iz baze
+        //BITNO: Ovdje sad ne valja jer na Blockchainu mogu imati vise proizvoda ovih a ovdje odmah iz baze brisem...popraviti kad proradi :]
+        const product = await Product.findById(req.params.product_id);
+        if (!product)
+            return res.status(404).json({ success: false, message: 'Product not found in database' });
+        // await Product.deleteOne({ _id: req.params.product_id });
 
-        //BITNO: Ovo sve treba na front da se potvrdi transakcija 
-
-        //return res.status(201).json({ success: true, message: "Product purchased!" });
+        const contract = await contractUtils.getByOwner(process.env.OWNER_PUBLIC_KEY);
+        return res.status(201).json({ contractABI: contract.abi, contractAddress: contract.address, productName: product.normalizedName });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ success: false, message: 'Failed to purchase the product. Check console for more information' });

@@ -95,8 +95,6 @@ contract CreateShop {
     //sol contract complexity will increase if I add a function to return an array of admins, which is not provided automaticaly (beucase its 'mapping') and it will cost more gas, because of that I will on backend store all admins in database
 
     function transferToAdmin(uint amount, address sender) private {
-        uint adminShare = amount / 2; // Split the payment equally between the owner and the sender (admin)
-        payable(owner).transfer(adminShare);
-        payable(sender).transfer(adminShare);
+        payable(owner).transfer(amount);
     }
 }
