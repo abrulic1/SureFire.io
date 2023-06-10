@@ -3,20 +3,16 @@ pragma solidity >=0.8.2 <0.9.0;
 
 contract CreateShop {
     address public owner;
-    mapping(address => bool) public admins;
     mapping(uint => Product) public products;
     uint public productCount = 0;
-    uint public adminCount = 1;  //owner added
     struct Product {
         string name;
         uint price;
         uint stock;
-        address owner;
     }
 
     constructor() {
         owner = msg.sender;
-        admins[msg.sender] = true; // Owner is also an admin
     }
 
     modifier onlyOwner() {
@@ -24,27 +20,9 @@ contract CreateShop {
         _;
     }
     
-    modifier onlyOwnerOrAdmin() {
-        require(msg.sender == owner || admins[msg.sender], "Only contract owner or admins can call this function.");
-        _;
-    }
-
-    function addAdmin(address adminAddress) public onlyOwner() {
-        require(!admins[adminAddress], "Admin with this address already exists.");
-        admins[adminAddress] = true;
-        adminCount++;
-    }
-
-    function removeAdmin(address adminAddress) public onlyOwner() {
-        require(adminAddress != owner, "Cannot remove the contract owner as admin.");
-        require(admins[adminAddress], "Admin with this address does not exist.");
-        admins[adminAddress] = false;    //because I cannot remove admin from mapping
-        adminCount--;
-    }
-
     event AddProductFailed(string message);
 
-    function addProduct(string memory name, uint price, uint stock) public onlyOwnerOrAdmin() returns (Product memory) {
+    function addProduct(string memory name, uint price, uint stock) public onlyOwner() returns (Product memory) {
         require(price > 0, "Price must be greater than zero.");
         require(stock > 0, "Amount must be greater than zero.");
         for (uint i = 0; i < productCount; i++) {
@@ -54,7 +32,7 @@ contract CreateShop {
             }
         }
 
-        Product memory newProduct = Product(name, price, stock, msg.sender);
+        Product memory newProduct = Product(name, price, stock);
         products[productCount++] = newProduct;
         return newProduct;
     }
@@ -63,7 +41,7 @@ contract CreateShop {
         return amountInEth * 10 ** 18;
     }
 
-    function restock(string memory name, uint amount) public onlyOwnerOrAdmin() returns (Product memory) {
+    function restock(string memory name, uint amount) public onlyOwner() returns (Product memory) {
         require(amount > 0, "Amount must be greater than zero.");
 
         for (uint i = 0; i < productCount; i++) {

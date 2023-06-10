@@ -5,15 +5,16 @@ import Card from '../Card/Card';
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getProductsByOwnerAddress } from "../../services/product-service";
+import { deploySmartContract } from "../../services/contract-service";
 
 const MyShop = () => {
     const navigate = useNavigate();
 
 //BITNO: ovo zakomentarisano vratiti
     
-    const createShopHandler = () => {
+    const createShopHandler = async () => {
         alert("Confirm deploying smart contract on Ethereum Blockchain");
-        
+        await deploySmartContract();
     }
     const products = null;
     /*
