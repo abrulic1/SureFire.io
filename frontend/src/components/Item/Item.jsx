@@ -5,6 +5,7 @@ import { handleBuyNowClick } from "./handleBuyNowClick";
 import { fetchProductById } from "../../services/product-service";
 import { useQuery } from "react-query";
 import Button from "../Button/Button";
+import Header from '../Header/Header';
 
 const Item = () => {
   const location = useLocation();
@@ -20,7 +21,9 @@ const Item = () => {
   const handleModalCloseClick = () => toggleModal(false);
 
   return (
-    <div>
+    <>
+    <Header />
+      <div className={ItemStyles['main-content']}>
       <h1 style={{ marginTop: "2vw" }}>PRODUCT DETAILS</h1>
       {data && (
         <div className={ItemStyles.content}>
@@ -37,14 +40,14 @@ const Item = () => {
                 <Button
                   mode="dark"
                   onClick={handleBuyNowButtonClick}
-                  text="Buy now"
+                  text="Add to cart"
                   style={{
                     margin: "0px",
                     borderTopRightRadius: "0px",
                     borderBottomRightRadius: "0px",
                   }}
                 />
-                <Button
+                {/* <Button
                   mode="dark"
                   text="Cart"
                   style={{
@@ -53,7 +56,7 @@ const Item = () => {
                     borderBottomLeftRadius: "0px",
                     borderLeft: "1px solid black",
                   }}
-                />
+                /> */}
               </div>
             </div>
             <h2>Description</h2>
@@ -104,7 +107,8 @@ const Item = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+      </>
   );
 };
 

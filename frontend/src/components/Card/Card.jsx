@@ -1,5 +1,6 @@
 import React from "react";
 import CardStyles from './Card.module.css';
+import Button from '../Button/Button';
 
 const Card = (props) => {
   const cardStyle = {
@@ -17,7 +18,7 @@ const Card = (props) => {
         <div className={CardStyles.description}>
           <h2>PRICE: { props.price } ETH</h2>
         </div>
-        <button>Buy now</button>
+        <Button text='Buy now' />
         {/* Ovdje samo nek otvori onaj modul za dodavanje u cart */}
     </div>
     )

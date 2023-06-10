@@ -85,7 +85,7 @@ contract CreateShop {
                 require(products[i].stock >= amount, "There are not enough products with this name!");
                 require(msg.value >= products[i].price * amount, "Incorrect payment amount!");
                 products[i].stock -= amount;
-                transferToAdmin(msg.value, msg.sender);
+                transferToAdmin(products[i].price * amount, msg.sender);
                 return;
             }
         }
