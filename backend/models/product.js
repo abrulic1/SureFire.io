@@ -25,7 +25,7 @@ const productSchema = new mongoose.Schema({
         type: Number, 
         required: true
     },
-    user_id: {
+    owner: {
         type: String,
         require: true
     }

@@ -9,36 +9,53 @@ import { getProductsByOwnerAddress } from "../../services/product-service";
 const MyShop = () => {
     const navigate = useNavigate();
 
+//BITNO: ovo zakomentarisano vratiti
+    
+    const createShopHandler = () => {
+        alert("Confirm deploying smart contract on Ethereum Blockchain");
+        
+    }
+    const products = null;
+    /*
     const { data: products, isLoading, isError } = useQuery("products", () => getProductsByOwnerAddress(localStorage.getItem("accountAddress")));
-  
+
     if (isLoading) {
         return <p>Loading...</p>;
     }
-  
+
     if (isError) {
         return <p>Error while fetching products</p>;
     }
-  
+    */
+
     return (
         <>
             <div className={MyShopStyles.collections}>
                 <h1>Your items</h1>
                 <div className={MyShopStyles["collections-cards"]}>
                     {products && products.length > 0 ? (
-                        products.map((product) => (
-                            <Card key={product.id} onClick={() => navigate(`/itemid/${product.id}`)} />
-                        ))
+                        <React.Fragment>
+                            {products.map((product) => (
+                                <Card key={product.id} onClick={() => navigate(`/itemid/${product.id}`)} />
+                            ))}
+                            <div className={MyShopStyles.buttons}>
+                                <button onClick={() => navigate('/additem')}>Add item</button>
+                            </div>
+                        </React.Fragment>
                     ) : (
+                        <div className={MyShopStyles["not-found-div"]}>
                             <div className={MyShopStyles["products-not-found"]}>
                                 <h1>No products found</h1>
                             </div>
+                            <div className={MyShopStyles.buttons}>
+                                <button onClick={() => createShopHandler()}>Create shop</button>
+                            </div>
+                        </div>
                     )}
                 </div>
-                <div className={MyShopStyles.buttons}>
-                    <button onClick={() => navigate('/additem')}>Add item</button>
-                </div>
+
             </div>
         </>
     );
 }
-  export default MyShop;
+export default MyShop;
