@@ -2,8 +2,17 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const shopSchema = new mongoose.Schema({
-   address: {type: String, required: true, unique: true},
-   owner: {type: mongoose.Types.ObjectId, required: true, ref: 'User'}
+   user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      require: true
+   },
+   contract_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Contract',
+      require: true
+   }
+
 });
 
 shopSchema.plugin(uniqueValidator);
