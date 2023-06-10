@@ -11,11 +11,16 @@ const contractSchema = new mongoose.Schema({
         type: Object,
         require: true
     },
-    user_id: {
-        type: String,
-        unique: true,
+    bytecode: {
+        type: Object,
         require: true
     },
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        unique: true,
+        require: true
+    }
 })
 
 

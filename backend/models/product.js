@@ -10,7 +10,7 @@ const productSchema = new mongoose.Schema({
         require: true
     },
     image: {
-        type: String,
+        type: Buffer,
         require: true
     },
     description: {
@@ -25,8 +25,9 @@ const productSchema = new mongoose.Schema({
         type: Number, 
         required: true
     },
-    owner: {
-        type: String,
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         require: true
     }
 });

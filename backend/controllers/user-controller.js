@@ -3,9 +3,6 @@ const User = require('../models/user');
 const getUserByAddress = async (req, res) => {
     try {
         const users = await User.find();
-        users.forEach((u) => {
-            console.log(u.address);
-        });
         const user = users.find((u) => u.address.toLowerCase() == req.query.address.toLowerCase());
         if (user)
             res.status(200).json(user);
