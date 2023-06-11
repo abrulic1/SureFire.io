@@ -5,20 +5,18 @@ import Card from '../Card/Card';
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getProductsByOwnerAddress } from "../../services/product-service";
-import { deploySmartContract } from "../../services/contract-service";
+import { deploySmartContract, getContractByUser } from "../../services/contract-service";
 
 const MyShop = () => {
     const navigate = useNavigate();
 
-//BITNO: ovo zakomentarisano vratiti
-    
     const createShopHandler = async () => {
         alert("Confirm deploying smart contract on Ethereum Blockchain");
         await deploySmartContract();
     }
-    const products = null;
-    /*
-    const { data: products, isLoading, isError } = useQuery("products", () => getProductsByOwnerAddress(localStorage.getItem("accountAddress")));
+
+    const { data: products, isLoading, isError } = useQuery("products", () => getProductsByOwnerAddress(localStorage.getItem("account")));
+    const { data: contract, isSuccess } = useQuery("contract", () => getContractByUser(localStorage.getItem("account")));
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -27,7 +25,6 @@ const MyShop = () => {
     if (isError) {
         return <p>Error while fetching products</p>;
     }
-    */
 
     return (
         <>
@@ -48,9 +45,17 @@ const MyShop = () => {
                             <div className={MyShopStyles["products-not-found"]}>
                                 <h1>No products found</h1>
                             </div>
-                            <div className={MyShopStyles.buttons}>
-                                <button onClick={() => createShopHandler()}>Create shop</button>
-                            </div>
+                            {contract !== undefined && contract && isSuccess ?
+                                (
+                                    <div className={MyShopStyles.buttons}>
+                                        <button onClick={() => navigate('/additem')}>Add item</button>
+                                    </div>) :
+                                (
+                                    <div className={MyShopStyles.buttons}>
+                                        <button onClick={() => createShopHandler()}>Create shop</button>
+                                    </div>
+                                )
+                            }
                         </div>
                     )}
                 </div>

@@ -6,4 +6,6 @@ connectToDb();
 
 
 router.get('/contract-artifacts', contractController.getContractArtifacts);
+router.post('/add-contract', contractController.addContract);
+router.get('/get-contract', contractController.getContractByUser);
 module.exports = router;

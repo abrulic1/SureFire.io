@@ -1,9 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import AddItemStyles from './AddItem.module.css';
 import AddItemIcon from './add-image.png';
+import Button from '../Button/Button';
+import { addProduct } from "../../services/contract-service";
 
 const AddItem = () => {
   const fileInputRef = useRef(null);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(0);
+  const [stock, setStock] = useState(0);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const handleImageUpload = () => {
     fileInputRef.current.click();
@@ -11,18 +19,53 @@ const AddItem = () => {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(file);
+    setImageFile(file);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handlePriceChange = (event) => {
+    setPrice(event.target.value);
+  };
+
+  const handleStockChange = (event) => {
+    setStock(event.target.value);
+  };
+
+  const handleSave = () => {
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const fileData = reader.result;
+        addProduct(localStorage.getItem("account"), name, price, stock, fileData);
+      };
+      reader.readAsDataURL(imageFile);
+    } else {
+      // Handle the case when no image is uploaded
+      addProduct(localStorage.getItem("account"), name, price, stock, null);
+    }
   };
 
   return (
     <>
       <div className={AddItemStyles.item}>
         <div className={AddItemStyles['item-photo']}>
-          <img
-            src={AddItemIcon}
-            alt="Add Item Icon"
-            onClick={handleImageUpload}
-          />
+          {imagePreview ? (
+            <img src={imagePreview} alt="Selected" onClick={handleImageUpload} className={AddItemStyles.uploaded}/>
+          ) : (
+            <img src={AddItemIcon} alt="Add Item Icon" onClick={handleImageUpload} />
+          )}
           <input
             type="file"
             accept="image/*"
@@ -33,16 +76,17 @@ const AddItem = () => {
         </div>
         <div className={AddItemStyles.info}>
           <h2>Name</h2>
-          <input></input>
+          <input type="text" value={name} onChange={handleNameChange} />
           <h2>Description</h2>
-          <input></input>
+          <input type="text" value={description} onChange={handleDescriptionChange} />
           <h2>Price</h2>
-          <input></input>
-          <h2>ETH</h2>
+          <input type="number" value={price} onChange={handlePriceChange} />
+          <h2>Quantity</h2>
+          <input type="number" value={stock} onChange={handleStockChange} />
         </div>
       </div>
       <div>
-        <button>Save</button>
+        <button onClick={handleSave}>Save</button>
       </div>
     </>
   );

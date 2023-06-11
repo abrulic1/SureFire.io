@@ -20,7 +20,7 @@ const getProductById = async (req, res) => {
 
 const addProduct = async (req, res) => {
     try {
-        const { image, name, price, stock, description, owner } = req.body;
+        const { name, image, description, price, stock, owner } = req.body;
         const newProduct = new Product({
             name,
             normalizedName: name.toUpperCase(),
@@ -28,11 +28,13 @@ const addProduct = async (req, res) => {
             description,
             price,
             stock,
-            owner,
+            owner
         });
+        console.log("PRRPRPRPRPRPRP:   ", newProduct);
         await newProduct.save();
         return res.status(200).json({ success: true, message: 'Product added successfully', product: newProduct });
     } catch (error) {
+        console.log("NE MOZE");
         console.log(error);
         return res.status(500).json({ success: false, message: 'Failed to add the product.' });
     }
