@@ -7,7 +7,9 @@ const userRoutes = require('./routes/user-routes');
 const contractRoutes = require('./routes/contract-routes');
 const { options } = require('./config/swagger');
 const app = express();
+const fileUpload = require('express-fileupload');
 
+app.use(fileUpload());
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {

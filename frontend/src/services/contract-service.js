@@ -80,7 +80,7 @@ export const getContractByUser = async (userAddress) => {
       }
 }
 
-export const addProduct = async (userAddress, name, price, stock, image, description) => {
+export const addProduct = async (userAddress, formData) => {
     let web3 = new Web3(window.ethereum);
     let contract = await getContractByUser(userAddress);
     const shop = new web3.eth.Contract(contract.abi, contract.address);
@@ -90,24 +90,18 @@ export const addProduct = async (userAddress, name, price, stock, image, descrip
     // await shop.methods.addProduct(name, price, stock).send({ from: userAddress });
     
     //NOTE 2: Second we add product to database if transaction is not reverted, otherwise we will add some popup notification to inform user that product cannot be stored because of duplication
-
-    const request = {
-      name, 
-      image,
-      description,
-      price,
-      stock,
-      owner: userAddress
-    }
-    await fetch(`${BE_URL}/products/add-product`, {
+    const response = await fetch(`${BE_URL}/products/add-product`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(request)
-    })
+      body: formData  // Send the formData object directly
+    });
 
-    console.log("reeeeeee: ", request);
+    if (!response.ok) {
+      throw new Error('Failed to add the product.');
+    }
+
+    const data = await response.json();
+    return data;
+
     } catch (error) {
       console.error(error);
     }

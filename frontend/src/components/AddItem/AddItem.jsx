@@ -43,17 +43,15 @@ const AddItem = () => {
     setStock(event.target.value);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (imageFile) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const fileData = reader.result;
-        addProduct(localStorage.getItem("account"), name, price, stock, fileData);
-      };
-      reader.readAsDataURL(imageFile);
-    } else {
-      // Handle the case when no image is uploaded
-      addProduct(localStorage.getItem("account"), name, price, stock, null);
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('image', imageFile);
+      formData.append('description', description);
+      formData.append('price', price);
+      formData.append('stock', stock);
+      await addProduct(localStorage.getItem("account"), formData);
     }
   };
 

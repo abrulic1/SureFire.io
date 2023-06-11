@@ -19,8 +19,18 @@ const getProductById = async (req, res) => {
 };
 
 const addProduct = async (req, res) => {
+    console.log("uslo je u addddprododododod");
     try {
-        const { name, image, description, price, stock, owner } = req.body;
+        const { name, description, price, stock, owner } = req.body;
+
+        if (!req.files || !req.files.image) {
+          return res.status(400).json({
+            success: false,
+            message: 'Image file is required.'
+          });
+        }
+    
+        const image = req.files.image.data;
         const newProduct = new Product({
             name,
             normalizedName: name.toUpperCase(),
@@ -30,11 +40,9 @@ const addProduct = async (req, res) => {
             stock,
             owner
         });
-        console.log("PRRPRPRPRPRPRP:   ", newProduct);
         await newProduct.save();
         return res.status(200).json({ success: true, message: 'Product added successfully', product: newProduct });
     } catch (error) {
-        console.log("NE MOZE");
         console.log(error);
         return res.status(500).json({ success: false, message: 'Failed to add the product.' });
     }
