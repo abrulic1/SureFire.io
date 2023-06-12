@@ -5,6 +5,10 @@ const swaggerUi = require('swagger-ui-express');
 const productRoutes = require('./routes/product-routes');
 const userRoutes = require('./routes/user-routes');
 const contractRoutes = require('./routes/contract-routes');
+const userProductsRoutes = require('./routes/user_products-routes');
+const cartItemRoutes = require('./routes/cart_item-routes');
+const cartRoutes = require('./routes/cart-routes');
+
 const { options } = require('./config/swagger');
 const app = express();
 const fileUpload = require('express-fileupload');
@@ -24,6 +28,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)));
 app.use('/api/products/', productRoutes);
 app.use('/api/users/', userRoutes);
 app.use('/api/contracts/', contractRoutes);
+app.use('/api/user_products/', userProductsRoutes);
+app.use('/api/cart_items/', cartItemRoutes);
+app.use('/api/cart/', cartRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`The server is running on port ${PORT}`));

@@ -6,6 +6,7 @@ import { fetchProductById } from "../../services/product-service";
 import { useQuery } from "react-query";
 import Button from "../Button/Button";
 import Header from '../Header/Header';
+import { getOwner } from "../../services/user_products-service";
 
 const Item = () => {
   const location = useLocation();
@@ -15,6 +16,7 @@ const Item = () => {
   const { data } = useQuery(["productById", id], () => fetchProductById(id), {
     staleTime: 60000,
   });
+  const { data: productOwner } = useQuery('productOwner', () => getOwner(id), { staleTime: 60000 });
 
   const toggleModal = (open) => setShowModal(open);
   const handleBuyNowButtonClick = () => toggleModal(true);
@@ -32,7 +34,7 @@ const Item = () => {
           </div>
           <div className={ItemStyles.details}>
             <h2>{data.name}</h2>
-            <h3>Owned by: {data.owner}</h3>
+            <h3>Owned by: {productOwner}</h3>
             <div className={ItemStyles.price}>
               <h3>Current Price</h3>
               <h2>{data.price} ETH</h2>
@@ -98,7 +100,7 @@ const Item = () => {
               <Button mode="dark" onClick={handleModalCloseClick} text="No" />
               <Button
                 onClick={() => {
-                  handleBuyNowClick(data.owner, id);
+                  handleBuyNowClick(localStorage.getItem("account"), id);
                   handleModalCloseClick();
                 }}
                 text="Yes"

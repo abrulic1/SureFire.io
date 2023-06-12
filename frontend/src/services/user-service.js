@@ -1,6 +1,7 @@
 import { BE_URL } from "../utils/constants";
 
 export const getUserByAddress = async (userAddress) => {
+  console.log("iz ovog je: userA   ", userAddress);
   try {
     const res = await fetch(
       `${BE_URL}/users/user?address=${encodeURIComponent(userAddress)}`

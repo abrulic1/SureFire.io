@@ -46,6 +46,7 @@ const AddItem = () => {
   const handleSave = async () => {
     if (imageFile) {
       const formData = new FormData();
+      formData.append("owner", localStorage.getItem("account"));
       formData.append('name', name);
       formData.append('image', imageFile);
       formData.append('description', description);

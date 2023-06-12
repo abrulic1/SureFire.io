@@ -51,23 +51,7 @@ const HomePage = () => {
             {products.map((product) => (
               <Card
                 key={product._id}
-                image={product.image}
-                price={product.price}
-                onClick={() => navigate(`/product?id=${product._id}`)}
-              />
-            ))}
-             {products.map((product) => (
-              <Card
-                key={product._id}
-                image={product.image}
-                price={product.price}
-                onClick={() => navigate(`/product?id=${product._id}`)}
-              />
-             ))}
-             {products.map((product) => (
-              <Card
-                key={product._id}
-                image={product.image}
+                image={`data:image/png;base64,${product.image}`}
                 price={product.price}
                 onClick={() => navigate(`/product?id=${product._id}`)}
               />

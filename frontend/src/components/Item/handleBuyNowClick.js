@@ -1,21 +1,20 @@
-import { makeOrder } from "../../services/order-service";
+import { addCartItem } from "../../services/cart_item-service";
+import { getUserByAddress } from "../../services/user-service";
 
-export const handleBuyNowClick = async (owner, id) => {
+
+export const handleBuyNowClick = async (userAddress, product_id) => {
   console.log("handleBUynowClick");
-  console.log("owner i id: ", owner, " ", id);
-    //if user is not connected with metamask, there we have to connect
-    //if user is connected, than we have to check can user buy this product 
+  console.log("user i id: ", userAddress, " ",product_id);
     try {
         if (window.ethereum && window.ethereum.selectedAddress) {
-          // User is connected to Metamask and has authorized your app
           const userAddress = window.ethereum.selectedAddress;
           console.log(`User is connected with address ${userAddress}`);
   
           alert("Confirm adding this product to your cart");
-          makeOrder(userAddress, id);
+          const user = await getUserByAddress(userAddress);
+          addCartItem(user._id, product_id);
           
         } else {
-          // User is not connected to Metamask or has not authorized your app
             console.log('User is not connected with Metamask');
             if (!window.ethereum) {
                 alert('Metamask extension is not installed. Please install it before continuing.');
@@ -26,8 +25,6 @@ export const handleBuyNowClick = async (owner, id) => {
               }
         }
       } catch (error) {
-        // Metamask is not available or not enabled in the user's browser
         console.error('Metamask is not available:', error.message);
-        // Provide fallback behavior
       }
 }

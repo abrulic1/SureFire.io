@@ -1,27 +1,28 @@
 import MyCartStyles from './MyCart.module.css';
 import Close from '../Header/close.png';
-import { getUserOrders } from '../../services/order-service';
 import { useQuery } from "react-query";
 import { useEffect, useState } from 'react';
 import { fetchProductById } from '../../services/product-service';
 import Button from '../Button/Button';
 import { purchaseProduct } from '../../services/product-service';
+import { getUserItems } from '../../services/cart_item-service';
 
 const MyCart = ({ setIsCartShown }) => {
   const closeCart = () => {
     setIsCartShown(false);
   };
 
-  const { data: userOrders, isLoading, isError } = useQuery('userOrders', () =>
-    getUserOrders(localStorage.getItem('account'), { staleTime: 6000 })
+  const { data: userOrders} = useQuery('userOrders', () =>
+    getUserItems(localStorage.getItem('account')),{ staleTime: 6000 }
   );
 
+  
   const [productsData, setProductsData] = useState([]);
 
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
-        const products = userOrders?.products || [];
+        const products = userOrders;
         const fetchedProducts = [];
 
         for (const product of products) {
@@ -29,6 +30,7 @@ const MyCart = ({ setIsCartShown }) => {
           fetchedProducts.push(productData);
         }
 
+        console.log("fetchedproducts: ", fetchedProducts)
         setProductsData(fetchedProducts);
       } catch (error) {
         console.error(error);
@@ -45,13 +47,12 @@ const MyCart = ({ setIsCartShown }) => {
         <button><img src={Close} onClick={closeCart} alt="Close"></img></button>
       </div>
       <div className={MyCartStyles['cart-content']}>
-        {userOrders && userOrders.products && userOrders.products.length > 0 ? (
+        {userOrders && userOrders.length > 0 ? (
           productsData.map((product, index) => (
             <div key={index} className={MyCartStyles.item}>
-              {/* Render the product details */}
-              {/* Example: */}
               <span className={MyCartStyles.spanko}>
-              <img src={product.image}></img>
+                {console.log("product: ", product)}
+              <img src={`data:image/*;base64,${product.image}`}></img>
                 <h2>{product.name}</h2>
                 </span>
               <Button mode='dark' text="Buy" onClick={ () => purchaseProduct(product._id, localStorage.getItem('account')) } />

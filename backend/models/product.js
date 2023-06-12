@@ -19,18 +19,12 @@ const productSchema = new mongoose.Schema({
     },
     price: {
         type: Number, 
-        required: true
+        require: true
     },
     stock: {
         type: Number, 
-        required: true
-    },
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
         require: true
     }
 });
-
 
 module.exports = mongoose.model('Product', productSchema);

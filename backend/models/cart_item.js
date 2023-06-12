@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const cartItemSchema = new mongoose.Schema({
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        require: true
-    },
     cart_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Cart',
@@ -21,4 +16,4 @@ const cartItemSchema = new mongoose.Schema({
 
 
 cartItemSchema.plugin(uniqueValidator);
-module.exports = mongoose.model('Cart_Items', cartItemSchema);
+module.exports = mongoose.model('Cart_Item', cartItemSchema);
