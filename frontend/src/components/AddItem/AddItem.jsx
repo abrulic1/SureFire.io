@@ -58,6 +58,7 @@ const AddItem = () => {
 
   return (
     <>
+     <h1>ADD PRODUCT</h1>
       <div className={AddItemStyles.item}>
         <div className={AddItemStyles['item-photo']}>
           {imagePreview ? (
@@ -65,6 +66,7 @@ const AddItem = () => {
           ) : (
             <img src={AddItemIcon} alt="Add Item Icon" onClick={handleImageUpload} />
           )}
+          
           <input
             type="file"
             accept="image/*"
@@ -87,6 +89,7 @@ const AddItem = () => {
       <div>
         <button onClick={handleSave}>Save</button>
       </div>
+  
     </>
   );
 };

@@ -1,6 +1,7 @@
 
-/* .collections{
-} */
+ .collections{
+    margin-top: 6%;
+} 
 
 .collections h1{
     color: white;
@@ -10,12 +11,14 @@
 .collections-cards{
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 0 2% 0 2%;
 }
 
 .buttons{
     border-radius: 2px;
     margin: 20px;
-    margin-top: 40px;
+    margin-top: 45px;
     display: flex;
     justify-content: center;
 }

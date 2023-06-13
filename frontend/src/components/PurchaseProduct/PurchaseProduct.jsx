@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { fetchProductById } from '../../services/product-service';
 import { purchaseProduct } from '../../services/contract-service';
+import LoadingCircle from '../LoadingCircle/LoadingCircle';
 
 
 const PurchaseProduct = () => {
@@ -21,7 +22,8 @@ const PurchaseProduct = () => {
         <>
             <h1>PURCHASE PRODUCT</h1>
             <div className={PurchaseProductStyles['purchase-container']}>
-                {
+                {product == null || product == 'undefined' ?
+                    <LoadingCircle /> :
                     product ?
                         (
                             <div className={PurchaseProductStyles.details}>

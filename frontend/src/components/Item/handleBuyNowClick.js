@@ -10,10 +10,10 @@ export const handleBuyNowClick = async (userAddress, product_id) => {
           const userAddress = window.ethereum.selectedAddress;
           console.log(`User is connected with address ${userAddress}`);
   
-          alert("Confirm adding this product to your cart");
-          const user = await getUserByAddress(userAddress);
-          addCartItem(user._id, product_id);
-          
+          if (window.confirm("Confirm adding this product to your cart")) {
+            const user = await getUserByAddress(userAddress);
+            addCartItem(user._id, product_id);
+          }
         } else {
             console.log('User is not connected with Metamask');
             if (!window.ethereum) {

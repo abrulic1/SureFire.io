@@ -7,6 +7,7 @@ export const getUserByAddress = async (userAddress) => {
       `${BE_URL}/users/user?address=${encodeURIComponent(userAddress)}`
     );
     const data = await res.json();
+    console.log("USER NAKON FETCNJANJA: ", data);
     return data;
   } catch (error) {
     console.log(error);

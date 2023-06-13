@@ -22,13 +22,13 @@ const getProductById = async (req, res) => {
     try {
       const product = await Product.findById(req.params.id);
         if (!product)
-            return res.status(404).json({ error: 'Product not found' });
+            return res.status(404).json(null);
 
       const updatedProduct = {
         ...product._doc,
         image: Buffer.from(product.image).toString('base64')
       };
-        res.json(updatedProduct);
+        res.status(200).json(updatedProduct);
     } catch (err) {
         res.status(500).send('Not valid params. Check console for more information');
     }
@@ -88,6 +88,7 @@ const purchaseProduct = async (req, res) => {
         return res.status(500).json({ success: false, message: 'Failed to purchase the product. Check console for more information' });
     }
 }
+
 
 exports.getAllProducts = getAllProducts;
 exports.getProductById = getProductById;

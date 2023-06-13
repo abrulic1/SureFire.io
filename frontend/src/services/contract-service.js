@@ -77,7 +77,8 @@ export const getContractByUser = async (userAddress) => {
         );
         const data = await response.json();
         return data;
-      } catch (error) {
+    } catch (error) {
+      console.log("problem u getcontractby user methodi"); 
         console.log(error);
       }
 }
@@ -128,7 +129,7 @@ export const purchaseProduct = async (productId, productName, userAddress, price
     await purchaseProductFromDB(productId, userAddress);
 
     const transactionUrl = `https://sepolia.etherscan.io/tx/${transactionHash}`;
-    saveTransactionDetails(transactionHash, transactionUrl, fromAddress, toAddress);
+    saveTransactionDetails(transactionHash, transactionUrl, fromAddress, toAddress, userAddress);
   } catch (error) {
     console.error(error);
   }

@@ -27,5 +27,17 @@ const getOwner = async (req, res) => {
 }
 
 
-    exports.addUserProduct = addUserProduct;
+const getUserProducts = async (req, res) => {
+    try {
+        console.log("OVAJ USERID JEl ", req.query.user_id);
+        const products = await User_Products.find({ user_id: req.query.user_id });
+        res.status(200).send(products);
+    } catch (err) {
+        console.log("GETUSERPRODUCTS NE RADI");
+        res.status(400).send(null);
+    }
+}
+
+exports.addUserProduct = addUserProduct;
 exports.getOwner = getOwner;
+exports.getUserProducts = getUserProducts;

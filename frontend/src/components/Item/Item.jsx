@@ -30,7 +30,7 @@ const Item = () => {
       {data && (
         <div className={ItemStyles.content}>
           <div className={ItemStyles.image}>
-            <img alt="item" src={data.image}></img>
+            <img alt="item" src={`data:image/png;base64,${data.image}`}></img>
           </div>
           <div className={ItemStyles.details}>
             <h2>{data.name}</h2>

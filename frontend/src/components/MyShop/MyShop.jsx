@@ -4,8 +4,8 @@ import Header from '../Header/Header';
 import Card from '../Card/Card';
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
-import { getProductsByOwnerAddress } from "../../services/product-service";
 import { deploySmartContract, getContractByUser } from "../../services/contract-service";
+import { getProductsByOwnerAddress } from "../../services/user_products-service";
 
 const MyShop = () => {
     const navigate = useNavigate();
@@ -15,38 +15,32 @@ const MyShop = () => {
         await deploySmartContract();
     }
 
-    const { data: products, isLoading, isError } = useQuery("products", () => getProductsByOwnerAddress(localStorage.getItem("account")));
     const { data: contract, isSuccess } = useQuery("contract", () => getContractByUser(localStorage.getItem("account")));
-
-    if (isLoading) {
-        return <p>Loading...</p>;
-    }
-
-    if (isError) {
-        return <p>Error while fetching products</p>;
-    }
-
+    const { data: products } = useQuery("products", () => getProductsByOwnerAddress(localStorage.getItem("account")));
     return (
         <>
+            <Header />
             <div className={MyShopStyles.collections}>
                 <h1>Your items</h1>
                 <div className={MyShopStyles["collections-cards"]}>
                     {products && products.length > 0 ? (
                         <React.Fragment>
                             {products.map((product) => (
-                                <Card key={product.id} onClick={() => navigate(`/itemid/${product.id}`)} />
+                                <Card
+                                    key={product._id}
+                                    image={`data:image/png;base64,${product.image}`}
+                                    price={product.price}
+                                    onClick={() => navigate(`/product?id=${product._id}`)}
+                                />
                             ))}
-                            <div className={MyShopStyles.buttons}>
-                                <button onClick={() => navigate('/additem')}>Add item</button>
-                            </div>
                         </React.Fragment>
                     ) : (
                         <div className={MyShopStyles["not-found-div"]}>
                             <div className={MyShopStyles["products-not-found"]}>
                                 <h1>No products found</h1>
-                                </div>
-                                {console.log("CONTRACT: ", contract)}
-                            {contract !== undefined && contract &&isSuccess ?
+                            </div>
+                            {console.log("CONTRACT: ", contract)}
+                            {contract !== undefined && contract && isSuccess ?
                                 (
                                     <div className={MyShopStyles.buttons}>
                                         <button onClick={() => navigate('/additem')}>Add item</button>
@@ -60,7 +54,9 @@ const MyShop = () => {
                         </div>
                     )}
                 </div>
-
+                <div className={MyShopStyles.buttons}>
+                    <button onClick={() => navigate('/additem')}>Add item</button>
+                </div>
             </div>
         </>
     );

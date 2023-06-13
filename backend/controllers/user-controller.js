@@ -2,12 +2,13 @@ const User = require('../models/user');
 
 const getUserByAddress = async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await User.find({});
         const user = users.find((u) => u.address.toLowerCase() == req.query.address.toLowerCase());
+        console.log("user: ", user);
         if (user)
-            res.status(200).json(user);
+            return res.status(200).json(user);
         else
-            return res.status(404).json({ error: 'User not found' });
+            return res.status(404).json(null);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Server error' });

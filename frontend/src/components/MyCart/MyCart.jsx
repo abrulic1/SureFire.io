@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { useEffect, useState } from 'react';
 import { fetchProductById } from '../../services/product-service';
 import Button from '../Button/Button';
+import LoadingCircle from '../LoadingCircle/LoadingCircle';
 import { purchaseProductFromDB } from '../../services/product-service';
 import { getUserItems } from '../../services/cart_item-service';
 import { useNavigate } from "react-router-dom";
@@ -49,7 +50,8 @@ const MyCart = ({ setIsCartShown }) => {
         <button><img src={Close} onClick={closeCart} alt="Close"></img></button>
       </div>
       <div className={MyCartStyles['cart-content']}>
-        {userOrders && userOrders.length > 0 ? (
+        {productsData.length==0 ? <LoadingCircle /> :
+        userOrders && userOrders.length > 0 ? (
           productsData.map((product, index) => (
             <div key={index} className={MyCartStyles.item}>
               <span className={MyCartStyles.spanko}>
