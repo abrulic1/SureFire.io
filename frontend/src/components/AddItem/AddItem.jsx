@@ -52,7 +52,7 @@ const AddItem = () => {
       formData.append('description', description);
       formData.append('price', price);
       formData.append('stock', stock);
-      await addProduct(localStorage.getItem("account"), formData);
+      await addProduct(localStorage.getItem("account"), formData, name, price, stock);
     }
   };
 

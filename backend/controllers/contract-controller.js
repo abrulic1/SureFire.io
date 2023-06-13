@@ -35,7 +35,7 @@ const getContractByUser = async (req, res) => {
     if (contract)
         res.status(200).send(contract);
     else
-        res.status(404).json({ success: false, message: 'Contract for this user not found' });
+        res.status(404).json(null);
 
 }
 

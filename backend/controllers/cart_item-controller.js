@@ -29,5 +29,20 @@ const getUserItems = async (req, res) => {
   };
 
 
+const deleteItem = async (req, res) => {
+    console.log("uslo je u deleteitem");
+    const { product_id } = req.query;
+    const { cart_id } = req.query;
+    try {
+        const item = await Cart_Item.findOneAndDelete({ cart_id, product_id });
+        console.log("item je: ", item)
+      res.status(200).json({ message: 'Cart item deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'An error occurred' });
+    }
+  };
+
 exports.addCartItem = addCartItem;
 exports.getUserItems = getUserItems;
+exports.deleteItem = deleteItem;

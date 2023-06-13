@@ -3,16 +3,26 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 const transactionSchema = new mongoose.Schema(
   {
-    id: {
+    hash: {
       type: String,
       required: true,
       unique: true
     },
-    user_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
-    }
+    url: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    from: {
+      type: String,
+      required: true,
+      unique: true
+    },
+   to: {
+    type: String,
+    required: true,
+    unique: true
+   }
   },
   { timestamps: true }
 );

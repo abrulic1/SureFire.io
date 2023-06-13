@@ -35,3 +35,22 @@ export const getUserItems = async (user_address) => {
   console.log("ITEMS:    ", items);
   return items;
 }
+
+
+export const deleteCartItem = async (product_id, cart_id) => {
+  console.log("uslo je u deletecartitem");
+  console.log("product i cart: ", product_id, " ", cart_id);
+  try {
+    const response = await fetch(`${BE_URL}/cart_items/delete-item?product_id=${encodeURIComponent(product_id)}&cart_id=${encodeURIComponent(cart_id)}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    console.log("respnosizniko: ", response);
+    const res = await response.json();
+    return res;
+  } catch (error) {
+    console.log("error iz deletea: ", error);
+  }
+}

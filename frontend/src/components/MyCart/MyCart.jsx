@@ -4,10 +4,12 @@ import { useQuery } from "react-query";
 import { useEffect, useState } from 'react';
 import { fetchProductById } from '../../services/product-service';
 import Button from '../Button/Button';
-import { purchaseProduct } from '../../services/product-service';
+import { purchaseProductFromDB } from '../../services/product-service';
 import { getUserItems } from '../../services/cart_item-service';
+import { useNavigate } from "react-router-dom";
 
 const MyCart = ({ setIsCartShown }) => {
+  const navigate = useNavigate();
   const closeCart = () => {
     setIsCartShown(false);
   };
@@ -55,7 +57,8 @@ const MyCart = ({ setIsCartShown }) => {
               <img src={`data:image/*;base64,${product.image}`}></img>
                 <h2>{product.name}</h2>
                 </span>
-              <Button mode='dark' text="Buy" onClick={ () => purchaseProduct(product._id, localStorage.getItem('account')) } />
+              <Button mode='dark' text="Buy" onClick={() =>
+                navigate(`/purchase-product?id=${product._id}`)} />
             </div>
           ))
         ) : (

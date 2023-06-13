@@ -1,3 +1,4 @@
+
 const Product = require('../models/product');
 const userUtils = require('../utils/user-utils');
 const { addUserProduct } = require('./user_products-controller');
@@ -76,7 +77,11 @@ const purchaseProduct = async (req, res) => {
         //obrisat ga iz svih ostalih korpi i tek onda odavje 
       }
 
-        await Product.deleteOne({ _id: req.params.product_id });
+        const updatedProduct = await Product.findOneAndUpdate(
+          { _id: req.params.product_id },
+          { stock: product.stock-1 },
+          { new: true }
+        );
         return res.status(200).json({ success: true, message: 'Product deleted successfully' });
     } catch (error) {
         console.log(error);

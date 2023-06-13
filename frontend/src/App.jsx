@@ -7,6 +7,7 @@ import AddItem from "./components/AddItem/AddItem";
 import Item from "./components/Item/Item";
 import HomePage from "./pages/HomePage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import PurchaseProduct from "./components/PurchaseProduct/PurchaseProduct";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/mycart" Component={MyCart}></Route>
             <Route path="/additem" Component={AddItem}></Route>
             <Route path="/product" Component={Item} query="id"></Route>
+            <Route path="/purchase-product" Component={PurchaseProduct} query="id"></Route>
           </Routes>
         </Router>
       </QueryClientProvider>

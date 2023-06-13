@@ -1,6 +1,8 @@
 import Web3 from 'web3';
 import { BE_URL } from "../utils/constants";
 import { getUserByAddress } from "./user-service";
+import { purchaseProductFromDB } from './product-service';
+import { saveTransactionDetails } from './transaction-service';
 
 export const deploySmartContract = async () => {
     let contractABI, contractBytecode;
@@ -80,14 +82,13 @@ export const getContractByUser = async (userAddress) => {
       }
 }
 
-export const addProduct = async (userAddress, formData) => {
+export const addProduct = async (userAddress, formData, name, price, stock) => {
     let web3 = new Web3(window.ethereum);
     let contract = await getContractByUser(userAddress);
     const shop = new web3.eth.Contract(contract.abi, contract.address);
     console.log("SHOP: ", shop);
   try {
-      //NOTE 1: First we add product on Ethereum, transaction will be reverted if we try to add product that is already stored on Ethereum
-    // await shop.methods.addProduct(name, price, stock).send({ from: userAddress });
+    await shop.methods.addProduct(name, price, stock).send({ from: userAddress });
     
     //NOTE 2: Second we add product to database if transaction is not reverted, otherwise we will add some popup notification to inform user that product cannot be stored because of duplication
     const response = await fetch(`${BE_URL}/products/add-product`, {
@@ -108,3 +109,29 @@ export const addProduct = async (userAddress, formData) => {
   
 }
   
+
+export const purchaseProduct = async (productId, productName, userAddress, price) => {
+  try {
+    let web3 = new Web3(window.ethereum);
+    let contract = await getContractByUser(userAddress);
+    const shop = new web3.eth.Contract(contract.abi, contract.address);
+
+    const transaction = await shop.methods.purchase(productName, 1).send({
+      from: userAddress,
+      value: price
+    });
+
+    const transactionHash = transaction.transactionHash;
+    const fromAddress = transaction.from;
+    const toAddress = transaction.to;
+
+    await purchaseProductFromDB(productId, userAddress);
+
+    const transactionUrl = `https://sepolia.etherscan.io/tx/${transactionHash}`;
+    saveTransactionDetails(transactionHash, transactionUrl, fromAddress, toAddress);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+

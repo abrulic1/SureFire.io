@@ -44,8 +44,9 @@ const MyShop = () => {
                         <div className={MyShopStyles["not-found-div"]}>
                             <div className={MyShopStyles["products-not-found"]}>
                                 <h1>No products found</h1>
-                            </div>
-                            {contract !== undefined && contract && isSuccess ?
+                                </div>
+                                {console.log("CONTRACT: ", contract)}
+                            {contract !== undefined && contract &&isSuccess ?
                                 (
                                     <div className={MyShopStyles.buttons}>
                                         <button onClick={() => navigate('/additem')}>Add item</button>
