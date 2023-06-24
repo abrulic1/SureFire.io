@@ -11,7 +11,7 @@ const MyShop = () => {
     const navigate = useNavigate();
 
     const createShopHandler = async () => {
-        alert("Confirm deploying smart contract on Ethereum Blockchain");
+        window.confirm("Confirm deploying smart contract on Ethereum Blockchain");
         await deploySmartContract();
     }
 
@@ -33,6 +33,9 @@ const MyShop = () => {
                                     onClick={() => navigate(`/product?id=${product._id}`)}
                                 />
                             ))}
+                                  <div className={MyShopStyles.buttons}>
+                    <button onClick={() => navigate('/additem')}>Add item</button>
+                </div>
                         </React.Fragment>
                     ) : (
                         <div className={MyShopStyles["not-found-div"]}>
@@ -54,9 +57,9 @@ const MyShop = () => {
                         </div>
                     )}
                 </div>
-                <div className={MyShopStyles.buttons}>
+                {/* <div className={MyShopStyles.buttons}>
                     <button onClick={() => navigate('/additem')}>Add item</button>
-                </div>
+                </div> */}
             </div>
         </>
     );

@@ -50,7 +50,7 @@ const MyCart = ({ setIsCartShown }) => {
         <button><img src={Close} onClick={closeCart} alt="Close"></img></button>
       </div>
       <div className={MyCartStyles['cart-content']}>
-        {productsData.length==0 ? <LoadingCircle /> :
+        {productsData == null || productsData =='undefined' ? <LoadingCircle /> :
         userOrders && userOrders.length > 0 ? (
           productsData.map((product, index) => (
             <div key={index} className={MyCartStyles.item}>

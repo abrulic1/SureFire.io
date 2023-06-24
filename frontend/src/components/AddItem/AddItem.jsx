@@ -86,7 +86,7 @@ const AddItem = () => {
           <input type="number" value={stock} onChange={handleStockChange} />
         </div>
       </div>
-      <div>
+      <div className={AddItemStyles.savebttn}> 
         <button onClick={handleSave}>Save</button>
       </div>
   

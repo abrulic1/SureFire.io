@@ -13,6 +13,7 @@
     align-items: start;
     height: 42vh;
     width: 23%;
+    margin-bottom: 20px;
 }
 
 .info h2{
@@ -57,4 +58,10 @@
 button{
     background-color: rgb(12, 12, 12);
     color: white;
+}
+
+.savebttn{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
 }
