@@ -45,6 +45,6 @@ router.get('/', productController.getAllProducts);
 router.get('/product/:id', productController.getProductById);
 router.post('/add-product', productController.addProduct);
 router.post('/:product_id/purchase', productController.purchaseProduct);
-
+router.get('/:normalizedName', productController.getProductsByName);
 
 module.exports = router;

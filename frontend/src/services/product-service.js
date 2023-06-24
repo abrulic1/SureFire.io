@@ -14,6 +14,22 @@ export const fetchProducts = async () => {
   }
 };
 
+export const getProductsByName = async (name) => {
+  console.log("uslo je u getProductsByName");
+  if (name == null)
+    return null;
+  try {
+    const normalizedName = name.toUpperCase();
+      const res = await fetch(`${BE_URL}/products/${encodeURIComponent(normalizedName)}`);
+      console.log("Fetching products..");
+    const data = await res.json();
+    console.log(data)
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+}
+
 export const fetchProductById = async (id) => {
   try {
     const response = await fetch(

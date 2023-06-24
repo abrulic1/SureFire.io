@@ -16,7 +16,23 @@ const getAllProducts = async (req, res) => {
       console.error(error);
       res.status(500).json({ success: false, message: 'Failed to retrieve products.' });
     }
-  };
+};
+
+const getProductsByName = async (req, res) => {
+  try {
+    const products = await Product.find({normalizedName: req.params.normalizedName});
+    const updatedProducts = products.map((product) => {
+      return {
+        ...product._doc,
+        image: Buffer.from(product.image).toString('base64')
+      };
+    });
+    res.json(updatedProducts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Failed to retrieve products.' });
+  }
+}
 
 const getProductById = async (req, res) => {
     try {
@@ -94,3 +110,4 @@ exports.getAllProducts = getAllProducts;
 exports.getProductById = getProductById;
 exports.addProduct = addProduct;
 exports.purchaseProduct = purchaseProduct;
+exports.getProductsByName = getProductsByName;

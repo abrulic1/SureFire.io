@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "../components/Header/Header";
 import Card from "../components/Card/Card";
 import HomePageStyles from "./HomePage.module.css";
 import { useNavigate } from "react-router-dom";
-import { fetchProducts } from "../services/product-service";
+import { fetchProducts, getProductsByName } from "../services/product-service";
 import { useQuery } from "react-query";
 
 const HomePage = () => {
@@ -14,7 +14,12 @@ const HomePage = () => {
     isError,
     isLoading,
     data: products,
-  } = useQuery(["products"], fetchProducts, { staleTime: 6000 });
+  } = useQuery(["products"], fetchProducts);
+  const { data: productsByName } = useQuery([localStorage.getItem("search")], () => getProductsByName(localStorage.getItem("search")), { staleTime: 6000 });
+  useEffect(() => {
+    if(localStorage.getItem("search"))
+    localStorage.setItem("search", null);
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -44,7 +49,22 @@ const HomePage = () => {
           Explore Products
         </button>
       </div>
-      {products  && (
+      {productsByName!=null && productsByName.length > 0 ?  
+        <div ref={exploreProductsRef}>
+        <h2>Explore Products</h2>
+          <div className={HomePageStyles.products}>
+            {console.log("ovovovov: ", productsByName)}
+          {productsByName.map((product) => (
+            <Card
+              key={product._id}
+              image={`data:image/png;base64,${product.image}`}
+              price={product.price}
+              onClick={() => navigate(`/product?id=${product._id}`)}
+            />
+          ))}
+        </div>
+      </div>
+       : (
         <div ref={exploreProductsRef}>
           <h2>Explore Products</h2>
           <div className={HomePageStyles.products}>
