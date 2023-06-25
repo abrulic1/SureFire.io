@@ -32,6 +32,11 @@ const transactionSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.Mixed,
       required: true
     },
+    affirmed: {
+      type: Boolean,
+      required: true,
+      default: false
+    }
   },
   { timestamps: true }
 );

@@ -53,3 +53,21 @@ export const getToContractTransactionsForOwner = async (userAddress) => {
         console.log(err);
     }
 }
+
+export const affirmTransactionInDB = async (transactionId) => {
+    try {
+        const res = await fetch(
+            `${BE_URL}/transactions/affirm-transaction/${encodeURIComponent(transactionId)}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                  }
+            }
+          );
+          const data = await res.json();
+          return data;
+    } catch (error) {
+    console.log(error);
+    }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { getToContractTransactionsForOwner } from '../../services/transaction-service';
+import { affirmTransactionInDB, getToContractTransactionsForOwner } from '../../services/transaction-service';
 import OrderStyles from './Orders.module.css';
 import Header from '../Header/Header';
 
@@ -17,13 +17,17 @@ const Orders = () => {
     const mailtoLink = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
 
         window.location.href = mailtoLink;
-        // 25.6: samo joj status postavit na 1, a tamo kad se kupe provjeravat 0 statuse, umjesto brisanja
-  };
+  
+    };
 
+  const affirmTransaction = async (transactionId, email) => {
+    sendEmail(email);
+    affirmTransactionInDB(transactionId);
+  }
   return (
     <>
       <Header />
-      {ordersForUser && ordersForUser.map((t) => (
+      {ordersForUser && ordersForUser.length>0 ? ordersForUser.map((t) => (
         <div className={OrderStyles.order} key={t.id}>
           <div className={OrderStyles.buyerDetails}>
             <h1>Buyer details:</h1>
@@ -34,10 +38,10 @@ const Orders = () => {
             <h2>Transaction url: <a href={t.url} target="_blank" rel="noopener noreferrer">Check here</a></h2>
           </div>
               <div className={OrderStyles.options}>
-              <button onClick={() => sendEmail(`${t.user_info.email}`)}>Send order</button>
+              <button onClick={() => affirmTransaction(t._id, `${t.user_info.email}`)}>Send order</button>
           </div>
         </div>
-      ))}
+      )) : <h2 className={OrderStyles.noOrders}>That's all. Have a nice day!</h2>}
     </>
   );
 };

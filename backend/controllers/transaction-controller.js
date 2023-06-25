@@ -38,7 +38,7 @@ const getUserTransactions = async (req, res) => {
 const getToContractTransactionsForOwner = async (req, res) => {
     try {
         console.log("contract address: ", req.query.contract_address);
-        const transactions = await Transaction.find({ to: (req.query.contract_address).toLowerCase() });
+        const transactions = await Transaction.find({ to: (req.query.contract_address).toLowerCase(), affirmed: false });
         console.log("transakcije upucene trenutno prijavljenom korisniku: ", transactions);
         return res.status(200).json(transactions);
     }
@@ -48,6 +48,19 @@ const getToContractTransactionsForOwner = async (req, res) => {
     }
 }
 
+
+const affirmTransaction = async (req, res) => {
+    try {
+        const transaction = await Transaction.findById(req.params.id);
+        transaction.affirmed = true;
+        await transaction.save();
+        res.status(200).json(transaction);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
 exports.saveTransaction = saveTransaction;
 exports.getUserTransactions = getUserTransactions;
 exports.getToContractTransactionsForOwner = getToContractTransactionsForOwner;
+exports.affirmTransaction = affirmTransaction;
