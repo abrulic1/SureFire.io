@@ -1,6 +1,6 @@
 
  .collections{
-    margin-top: 6%;
+    /* margin-top: 5%; */
 } 
 
 .collections h1{
@@ -10,7 +10,6 @@
 
 .collections-cards{
     display: flex;
-    flex-direction: column;
     justify-content: space-evenly;
     flex-wrap: wrap;
     padding: 0 2% 0 2%;
@@ -20,6 +19,7 @@
     border-radius: 2px;
     margin: 20px;
     margin-top: 45px;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -47,3 +47,4 @@
 not-found-div{
     display: flex;
 }
+

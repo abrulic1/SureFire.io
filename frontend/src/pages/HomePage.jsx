@@ -3,8 +3,8 @@ import Header from "../components/Header/Header";
 import Card from "../components/Card/Card";
 import HomePageStyles from "./HomePage.module.css";
 import { useNavigate } from "react-router-dom";
-import { fetchProducts } from "../services/product-service";
 import { useQuery } from "react-query";
+import { getProducts } from "../services/user_products-service";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const HomePage = () => {
     isError,
     isLoading,
     data: products,
-  } = useQuery(["products"], fetchProducts, { staleTime: 6000 });
+  } = useQuery(["products-2"], () => getProducts(localStorage.getItem("account")),  {staleTime: 0});
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -59,6 +59,9 @@ const HomePage = () => {
           </div>
         </div>
       )}
+      <div className={HomePageStyles.footer}>
+             <h2>© 2022 - 2023 Qwert Asdf, Yui</h2> 
+      </div>
     </>
   );
 };

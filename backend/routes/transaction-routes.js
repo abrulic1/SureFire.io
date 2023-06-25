@@ -7,4 +7,5 @@ connectToDb();
 
 router.post('/save-transaction', transactionController.saveTransaction);
 router.get('/user-transactions', transactionController.getUserTransactions);
+router.get('/transactions/', transactionController.getToContractTransactionsForOwner);
 module.exports = router;

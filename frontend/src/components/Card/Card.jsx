@@ -18,8 +18,7 @@ const Card = (props) => {
         <div className={CardStyles.description}>
           <h2>PRICE: { props.price } ETH</h2>
         </div>
-        <Button text='Buy now' />
-        {/* Ovdje samo nek otvori onaj modul za dodavanje u cart */}
+        {props.disableBuy ? null  :  <Button text='Buy now' />}  
     </div>
     )
 }

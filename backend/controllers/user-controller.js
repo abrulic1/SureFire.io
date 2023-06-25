@@ -4,7 +4,6 @@ const getUserByAddress = async (req, res) => {
     try {
         const users = await User.find({});
         const user = users.find((u) => u.address.toLowerCase() == req.query.address.toLowerCase());
-        console.log("user: ", user);
         if (user)
             return res.status(200).json(user);
         else
@@ -15,6 +14,15 @@ const getUserByAddress = async (req, res) => {
     }
 };
 
+const getUserById = async (req, res) => {
+    console.log("user params ", req.params.user_id);
+    try {
+        const user = await User.findById(req.params.user_id);
+        return res.status(200).json(user)
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 const getById = async (user_id) => {
     try {
@@ -50,3 +58,4 @@ const addUser = async (req, res) => {
 exports.getUserByAddress = getUserByAddress;
 exports.getById = getById;
 exports.addUser = addUser;
+exports.getUserById = getUserById;

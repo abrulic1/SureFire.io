@@ -1,0 +1,35 @@
+.order a{
+    color: rgb(144, 144, 144);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.order {
+    border: rgb(144, 144, 144) 1px solid;
+    margin: 5% 5% 0 5%;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buyerDetails{
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+}
+
+
+.options{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-top: 30px;
+}
+
+.options button{
+    min-width: 200px;
+    width: max-content;
+    color: rgb(144, 144, 144);
+    font-size: 15px;
+}

@@ -14,7 +14,7 @@ const PurchaseProduct = () => {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [address, setAddress] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
 
     const { data: product } = useQuery('productId', () => fetchProductById(productId), { staleTime: 6000 });
 
@@ -62,17 +62,17 @@ const PurchaseProduct = () => {
                     onChange={(e) => setAddress(e.target.value)}
                 />
 
-                <label htmlFor="phoneNumber">Phone number:</label>
+                <label htmlFor="email">Email:</label>
                 <input
                     type="text"
-                    id="phoneNumber"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
 
 <h2>Estimated delivery: 30 - 60 days</h2>
 
-                <button type="submit" onClick={() => purchaseProduct(productId, product.name, localStorage.getItem("account"), product.price)}>Submit</button>
+                <button type="submit" onClick={() => purchaseProduct(productId, product.name, localStorage.getItem("account"), product.price, name, surname, address, email)}>Submit</button>
                  {/* //BITNO: ovdje bi bilo dobro da nakon sto se proda sa ethereuma da se redirecta na home page i dobije notifikacija tamo */}
             </div>
         </>

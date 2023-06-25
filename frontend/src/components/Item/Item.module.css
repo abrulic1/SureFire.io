@@ -6,21 +6,25 @@
 
 .main-content{
     position: relative;
-    top: 80px;
+    top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 h1 {
     color: rgb(144, 144, 144);
     margin: 20px;
-    font-size: 2vw;
 }
 
 .image {
     border-radius: 20px;
     border: 1px solid rgba(0, 0, 0, 0.6);
     margin: 20px;
-    width: 100%;
-    height: 100%;
+    max-width: 35%;
+    max-height: 35%;
+    min-width: 35%;
+    min-height: 35%;
     overflow: hidden;
 }
 
@@ -41,7 +45,7 @@ h1 {
 .details {
     margin: 20px;
     border: 1px solid black;
-    width: 50%;
+    width: 40%;
     min-width: 400px;
     min-height: 50%;
     padding: 20px;
@@ -49,14 +53,9 @@ h1 {
     border-radius: 20px;
 }
 
-.details h2 {
-    color: white;
-    font-size: 2vw;
-}
-
-.details h3 {
-    color: white;
-    font-size: 1.3vw;
+.details h2, .details h3{
+    color: rgb(144, 144, 144);
+    font-size: 1.5rem;
 }
 
 .price {
@@ -74,7 +73,7 @@ span{
 span:hover{
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: unset;
-    cursor: unset;
+    cursor: pointer;
 }
 
 span h2{
@@ -127,6 +126,5 @@ border-bottom: 1px solid black;
 .close {
     margin-left: auto;
     display: block;
-    font-size: 1.5rem;
     cursor: pointer;
 }

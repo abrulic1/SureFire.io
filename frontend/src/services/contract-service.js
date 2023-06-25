@@ -1,8 +1,9 @@
 import Web3 from 'web3';
 import { BE_URL } from "../utils/constants";
-import { getUserByAddress } from "./user-service";
+import { getUserByAddress, getUserById } from "./user-service";
 import { purchaseProductFromDB } from './product-service';
 import { saveTransactionDetails } from './transaction-service';
+import { getOwner } from './user_products-service';
 
 export const deploySmartContract = async () => {
     let contractABI, contractBytecode;
@@ -78,7 +79,6 @@ export const getContractByUser = async (userAddress) => {
         const data = await response.json();
         return data;
     } catch (error) {
-      console.log("problem u getcontractby user methodi"); 
         console.log(error);
       }
 }
@@ -87,7 +87,6 @@ export const addProduct = async (userAddress, formData, name, price, stock) => {
     let web3 = new Web3(window.ethereum);
     let contract = await getContractByUser(userAddress);
     const shop = new web3.eth.Contract(contract.abi, contract.address);
-    console.log("SHOP: ", shop);
   try {
     await shop.methods.addProduct(name, price, stock).send({ from: userAddress });
     
@@ -111,12 +110,16 @@ export const addProduct = async (userAddress, formData, name, price, stock) => {
 }
   
 
-export const purchaseProduct = async (productId, productName, userAddress, price) => {
+export const purchaseProduct = async (productId, productName, userAddress, price, name, surname, address, email) => {
   try {
     let web3 = new Web3(window.ethereum);
-    let contract = await getContractByUser(userAddress);
+    //uzeti contract na osnovu ownera ali iz User_Products tabele
+    let ownerId = await getOwner(productId);
+    let owner = await getUserById(ownerId);
+    console.log("owner: ", owner);
+    let contract = await getContractByUser(owner.address);
     const shop = new web3.eth.Contract(contract.abi, contract.address);
-
+    console.log("price ", price);
     const transaction = await shop.methods.purchase(productName, 1).send({
       from: userAddress,
       value: price
@@ -129,7 +132,13 @@ export const purchaseProduct = async (productId, productName, userAddress, price
     await purchaseProductFromDB(productId, userAddress);
 
     const transactionUrl = `https://sepolia.etherscan.io/tx/${transactionHash}`;
-    saveTransactionDetails(transactionHash, transactionUrl, fromAddress, toAddress, userAddress);
+    const user_info = {
+      name,
+      surname,
+      address,
+      email
+    }
+    saveTransactionDetails(transactionHash, transactionUrl, fromAddress, toAddress, userAddress, user_info);
   } catch (error) {
     console.error(error);
   }

@@ -2,11 +2,8 @@ const Cart = require('../models/cart');
 
 
 const checkCart = async (req, res) => {
-    console.log("pozvana je checkCart");
-    console.log("u njoj je user_d: ", req.params.user_id);
     try {
         const cart = await Cart.findOne({ user_id: req.params.user_id });
-        console.log("ovdje u checkCart: ", cart); 
         if (cart)
             res.status(200).json(cart);
         else

@@ -16,13 +16,10 @@ const addCartItem = async (req, res) => {
 
 
 const getUserItems = async (req, res) => {
-    console.log("uslo je u getUserItems");
     const { cart_id } = req.query;
-    console.log("cart_id: ", cart_id)
     const cart_items = await Cart_Item.find({ cart_id });
     if (cart_items) {
         const products = cart_items.map(u => (u.product_id));
-        console.log("Products: ", products);
         return res.status(200).json(products);
     }
     res.json(null);
@@ -30,12 +27,10 @@ const getUserItems = async (req, res) => {
 
 
 const deleteItem = async (req, res) => {
-    console.log("uslo je u deleteitem");
     const { product_id } = req.query;
     const { cart_id } = req.query;
     try {
         const item = await Cart_Item.findOneAndDelete({ cart_id, product_id });
-        console.log("item je: ", item)
       res.status(200).json({ message: 'Cart item deleted successfully' });
     } catch (error) {
       console.error(error);

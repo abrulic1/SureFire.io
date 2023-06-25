@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { deploySmartContract, getContractByUser } from "../../services/contract-service";
 import { getProductsByOwnerAddress } from "../../services/user_products-service";
-
+import LoadingCircle from "../LoadingCircle/LoadingCircle";
 const MyShop = () => {
     const navigate = useNavigate();
 
@@ -15,15 +15,15 @@ const MyShop = () => {
         await deploySmartContract();
     }
 
-    const { data: contract, isSuccess } = useQuery("contract", () => getContractByUser(localStorage.getItem("account")));
-    const { data: products } = useQuery("products", () => getProductsByOwnerAddress(localStorage.getItem("account")));
+    const { data: contract, isSuccess } = useQuery("contract", () => getContractByUser(localStorage.getItem("account")), {staleTime: 5000});
+    const { data: products, isLoading } = useQuery("products-1", () => getProductsByOwnerAddress(localStorage.getItem("account")),  {staleTime: 5000});
     return (
         <>
-            <Header />
             <div className={MyShopStyles.collections}>
                 <h1>Your items</h1>
                 <div className={MyShopStyles["collections-cards"]}>
-                    {products && products.length > 0 ? (
+                    {isLoading ? <LoadingCircle /> : 
+                        (products && products.length > 0) ? (
                         <React.Fragment>
                             {products.map((product) => (
                                 <Card
@@ -31,6 +31,7 @@ const MyShop = () => {
                                     image={`data:image/png;base64,${product.image}`}
                                     price={product.price}
                                     onClick={() => navigate(`/product?id=${product._id}`)}
+                                    disableBuy="true"
                                 />
                             ))}
                                   <div className={MyShopStyles.buttons}>
@@ -42,7 +43,6 @@ const MyShop = () => {
                             <div className={MyShopStyles["products-not-found"]}>
                                 <h1>No products found</h1>
                             </div>
-                            {console.log("CONTRACT: ", contract)}
                             {contract !== undefined && contract && isSuccess ?
                                 (
                                     <div className={MyShopStyles.buttons}>
@@ -55,11 +55,8 @@ const MyShop = () => {
                                 )
                             }
                         </div>
-                    )}
+                    )} 
                 </div>
-                {/* <div className={MyShopStyles.buttons}>
-                    <button onClick={() => navigate('/additem')}>Add item</button>
-                </div> */}
             </div>
         </>
     );

@@ -27,7 +27,11 @@ const transactionSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true
-   }
+    },
+    user_info: {
+      type: mongoose.Schema.Types.Mixed,
+      required: true
+    },
   },
   { timestamps: true }
 );

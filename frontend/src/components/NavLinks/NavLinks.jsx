@@ -35,7 +35,7 @@ const NavLinks = ({ setUserFunctionalities, setIsCartShown }) => {
 
   return (
     <div className={NavLinksStyles["images-actions"]}>
-      {!isConnected ? (
+      {!localStorage.getItem("account") ? (
         <button
           title="Connect with MetaMask"
           className={NavLinksStyles.connect}
@@ -45,12 +45,12 @@ const NavLinks = ({ setUserFunctionalities, setIsCartShown }) => {
         </button>
       ) : (
           <>
-        <button title="Balance" className={NavLinksStyles.balance}>
+        <button title="Balance" className={NavLinksStyles.balance} onClick={showFunctionalities}>
           {balance} ETH
           </button>
-            <button className={NavLinksStyles.profile} title="Profile">
+            {/* <button className={NavLinksStyles.profile} title="Profile">
               <img src={ProfileIcon} onClick={showFunctionalities} />
-            </button>
+            </button> */}
             </>
       )}
       <button title="My Cart">

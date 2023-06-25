@@ -3,13 +3,14 @@ const Transaction = require('../models/transaction');
 
 const saveTransaction = async(req, res) => {
     console.log("uslo je u saveTransaction");
-    const { transactionHash, transactionUrl, fromAddress, toAddress, user_address } = req.body;
+    const { transactionHash, transactionUrl, fromAddress, toAddress, user_address, user_info } = req.body;
     const transaction = new Transaction({
         hash: transactionHash,
         url: transactionUrl,
         from: fromAddress,
         to: toAddress,
-        user_address
+        user_address,
+        user_info
     })
     try {
         const savedTransaction = await transaction.save();
@@ -24,11 +25,21 @@ const saveTransaction = async(req, res) => {
 
 
 const getUserTransactions = async (req, res) => {
-    console.log("getusertransactionssss");
     try {
-        console.log("addressa: ", req.query.user_address);
         const transactions = await Transaction.find({ user_address: (req.query.user_address).toLowerCase() });
-        console.log("transactions: ", transactions);
+        return res.status(200).json(transactions);
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(501).json(null);
+    }
+}
+
+const getToContractTransactionsForOwner = async (req, res) => {
+    try {
+        console.log("contract address: ", req.query.contract_address);
+        const transactions = await Transaction.find({ to: (req.query.contract_address).toLowerCase() });
+        console.log("transakcije upucene trenutno prijavljenom korisniku: ", transactions);
         return res.status(200).json(transactions);
     }
     catch (err) {
@@ -39,3 +50,4 @@ const getUserTransactions = async (req, res) => {
 
 exports.saveTransaction = saveTransaction;
 exports.getUserTransactions = getUserTransactions;
+exports.getToContractTransactionsForOwner = getToContractTransactionsForOwner;

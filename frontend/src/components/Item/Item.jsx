@@ -24,9 +24,9 @@ const Item = () => {
 
   return (
     <>
-    <Header />
+      <Header />
+      <h2 style={{ marginTop: "6%" }}>PRODUCT DETAILS</h2>
       <div className={ItemStyles['main-content']}>
-      <h1 style={{ marginTop: "2vw" }}>PRODUCT DETAILS</h1>
       {data && (
         <div className={ItemStyles.content}>
           <div className={ItemStyles.image}>

@@ -14,7 +14,24 @@ export const getOwner = async (product_id) => {
       }
 }
 
+export const getProducts = async (address) => {
+  console.log("uslo je u getproducts");
+  try {
+
+    const user = await getUserByAddress(address);
+    const response = await fetch(
+      `${BE_URL}/user_products/products?user_id=${encodeURIComponent(user._id)}`
+    );
+    const data = await response.json();
+    return data;
+  }
+ catch (error) {
+    console.log(error);
+  }
+}
+
 export const getProductsByOwnerAddress = async (address) => {
+  console.log("Uslo je u getProducts BYOWNERaddress");
   try {
     const user = await getUserByAddress(address);
     const response = await fetch(
@@ -22,7 +39,6 @@ export const getProductsByOwnerAddress = async (address) => {
     );
     const data = await response.json();
     const arrayOfProductIds = data[0].product_id;
-    console.log("PROIVODII ZA OWNERA: ", arrayOfProductIds);   //ovo je sad niz od product_id-eva
 
     const onlyProducts = arrayOfProductIds.map(async (u) => {
       const product = await fetchProductById(u);
@@ -31,7 +47,6 @@ export const getProductsByOwnerAddress = async (address) => {
 
 
     const products = await Promise.all(onlyProducts);
-    console.log("Products: ", products);
     return products;
   } catch (error) {
     console.log(error);

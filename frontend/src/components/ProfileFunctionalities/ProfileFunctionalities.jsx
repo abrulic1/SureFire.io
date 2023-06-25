@@ -5,28 +5,25 @@ import Grid from './grid.png';
 import Cart from './cart.png';
 import LogOut from './log-out.png';
 import {useNavigate} from 'react-router-dom';
+import { useQuery } from "react-query";
+import { getToContractTransactionsForOwner } from "../../services/transaction-service";
 
-const Functionalities = ({userFunctionalities, setUserFunctionalities}) => {
+const Functionalities = ({ userFunctionalities, setUserFunctionalities }) => {
+   const { data: ordersForUser } = useQuery("ordersForUser", () => getToContractTransactionsForOwner(localStorage.getItem("account")));
     const closeFunctionalities = ()=>{
         setUserFunctionalities(false);
     } 
     const navigate = useNavigate();
 
-   //  const handleLogout = () => {
-   //    try {
-   //      // Clear the account and balance values
-   //    //   setAccount(null);
-   //    //   setBalance(0);
-   //    //   setIsConnected(false);
-   //      localStorage.removeItem("account");
-   //      localStorage.removeItem("balance");
-    
-   //      // Prompt the user to manually disconnect from MetaMask
-   //      alert("Please disconnect from MetaMask manually.");
-   //    } catch (error) {
-   //      console.error("Error occurred while logging out:", error);
-   //    }
-   //  };
+    const handleLogout = () => {
+      try {
+        localStorage.removeItem("account");
+        localStorage.removeItem("balance");
+        alert("Please disconnect from MetaMask manually.");
+      } catch (error) {
+        console.error("Error occurred while logging out:", error);
+      }
+    };
   
        return ( 
        <div className={FunctionalitiesStyles.functionalities} onMouseLeave={closeFunctionalities}>
@@ -45,7 +42,12 @@ const Functionalities = ({userFunctionalities, setUserFunctionalities}) => {
       <img src={Cart} alt="Cart"></img>
          <h2>My Orders</h2>
       </span> */}
-      <span>
+             {ordersForUser && ordersForUser.length > 0 ? 
+      <span onClick={()=>navigate('/orders')}>
+      <img src={Cart} alt="Cart"></img>
+         <h2>Orders for You</h2>
+      </span> : null}
+      <span onClick={handleLogout}>
       <img src={LogOut} alt="Log out"></img>
          <h2>Log out</h2>
       </span>

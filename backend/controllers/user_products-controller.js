@@ -1,5 +1,5 @@
+const Product = require('../models/product');
 const User_Products = require('../models/user_product');
-
 const addUserProduct = async (owner_id, product_id) => {
     const products = await User_Products.find({ user_id: owner_id });
 
@@ -29,15 +29,36 @@ const getOwner = async (req, res) => {
 
 const getUserProducts = async (req, res) => {
     try {
-        console.log("OVAJ USERID JEl ", req.query.user_id);
         const products = await User_Products.find({ user_id: req.query.user_id });
         res.status(200).send(products);
     } catch (err) {
-        console.log("GETUSERPRODUCTS NE RADI");
         res.status(400).send(null);
+    }
+}
+const getProductsWhereOwnerIsNot = async (req, res) => {
+    try {
+        const products = await User_Products.find();
+        const productsOfOwners = products.filter(p => p.user_id != req.query.user_id);
+        const onlyProducts = productsOfOwners.map(p => p.product_id).flat();
+        const productsagain = [];
+        for (const id of onlyProducts) {
+            const p = await Product.findById(id);
+            productsagain.push(p)
+        }
+        
+        const updatedProducts = productsagain.map((product) => {
+            return {
+              ...product._doc,
+              image: Buffer.from(product.image).toString('base64')
+            };
+          });
+          res.status(200).json(updatedProducts);
+    } catch (error) {
+        console.log(error);
     }
 }
 
 exports.addUserProduct = addUserProduct;
 exports.getOwner = getOwner;
 exports.getUserProducts = getUserProducts;
+exports.getProductsWhereOwnerIsNot = getProductsWhereOwnerIsNot;

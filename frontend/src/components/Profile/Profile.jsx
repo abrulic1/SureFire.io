@@ -18,34 +18,28 @@ const Profile = () => {
     <>
       <Header />
       <div className={ProfileStyles["profile-card"]}>
-        {/* <div className={ProfileStyles.image}>
-          <img alt="profile" src={ProfileIcon}></img>
-        </div> */}
         <div className={ProfileStyles.info}>
           <h2>
-            Accout address: <span>{ localStorage.getItem("account")}</span>
+            Accout address: {localStorage.getItem("account")}
           </h2>
           <h2>
-            Balance: <span>{localStorage.getItem("balance")} ETH</span>
+            Balance: {localStorage.getItem("balance")} ETH
           </h2>
-          <br />
-          <h2>Purchased products</h2>
-          {/* <div>
-            {transactions != null || transactions != 'undefined' ?
-              transactions.map(t => {
-                return  <a href={t.url} target="_blank" rel="noopener noreferrer">{t.url}</a>
-              }) :
-
+          <br></br>
+          <hr />
+          <br></br>
+          <div>
+            {console.log("transactions: ", transactions)}
+            {transactions != null && transactions != 'undefined' && transactions.length > 0 ?
+              <>
+              <h2>Purchased products</h2>
+                {transactions.map(t => {
+                  return <a href={t.url} target="_blank" rel="noopener noreferrer">{t.url}</a>
+                })}
+                </> :
               <h2>You don't have any purchased product</h2>
           }
-          </div> */}
-        </div>
-        <div className={ProfileStyles.buttons}>
-          <button onClick={() => navigate("/myshop")}>
-            Check your Products
-          </button>
-          {/* <button onClick={() => navigate('/mycart')}>Check your Cart</button> */}
-          {/* <button onClick={() => navigate('/myorders')}>Check your Orders</button> */}
+          </div>
         </div>
       </div>
     </>

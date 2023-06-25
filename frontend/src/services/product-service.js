@@ -6,7 +6,6 @@ import { getUserByAddress } from "./user-service";
 export const fetchProducts = async () => {
   try {
     const res = await fetch(`${BE_URL}/products/`);
-    console.log("Fetching products..");
     const data = await res.json();
     return data;
   } catch (error) {
