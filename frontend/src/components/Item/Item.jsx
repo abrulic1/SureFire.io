@@ -40,7 +40,6 @@ const Item = () => {
               <h2>{data.price} ETH</h2>
               <div className={ItemStyles.buttons}>
                 <Button
-                  mode="dark"
                   onClick={handleBuyNowButtonClick}
                   text="Add to cart"
                   style={{
@@ -61,8 +60,7 @@ const Item = () => {
                 /> */}
               </div>
             </div>
-            <h2>Description</h2>
-            <h3>No description available</h3>
+            <h2>Description: {data.description}</h2>
           </div>
         </div>
       )}
@@ -72,27 +70,19 @@ const Item = () => {
             <h1>This product will be added to your cart</h1>
             <div>
               <span>
-                <h2>product name:</h2>
+                <h2>Name:</h2>
                 <h2>{data.name}</h2>
               </span>
               <span>
-                <h2>owner:</h2>
-                <h2>{data.owner}</h2>
-              </span>
-              <span>
-                <h2>description:</h2>
-                <h2>No description available</h2>
-              </span>
-              <span>
-                <h2>contract:</h2>
-                <h2>{data.owner}</h2>
+                <h2>Description:</h2>
+                  <h2>{data.description}</h2>
               </span>
               <span className={ItemStyles["span-price"]}>
-                <h2>price:</h2>
+                <h2>Price:</h2>
                 <h2>{data.price} ETH</h2>
               </span>
               <span>
-                <h2>amount:</h2>
+                <h2>Amount:</h2>
                 <h2>1</h2>
               </span>
             </div>

@@ -13,8 +13,8 @@ const HomePage = () => {
   const {
     isError,
     isLoading,
-    data: products,
-  } = useQuery(["products-2"], () => getProducts(localStorage.getItem("account")),  {staleTime: 0});
+    data: products
+  } = useQuery(["products-2"], () => getProducts(localStorage.getItem("account")),  {staleTime: 1000});
 
   if (isLoading) {
     return <div>Loading...</div>;

@@ -3,8 +3,9 @@ import AddItemStyles from './AddItem.module.css';
 import AddItemIcon from './add-image.png';
 import Button from '../Button/Button';
 import { addProduct } from "../../services/contract-service";
-
+import { useNavigate } from "react-router-dom";
 const AddItem = () => {
+  let navigate = useNavigate();
   const fileInputRef = useRef(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -53,6 +54,8 @@ const AddItem = () => {
       formData.append('price', price);
       formData.append('stock', stock);
       await addProduct(localStorage.getItem("account"), formData, name, price, stock);
+      navigate('/myshop');
+
     }
   };
 

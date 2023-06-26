@@ -34,7 +34,7 @@ const Profile = () => {
               <>
               <h2>Purchased products</h2>
                 {transactions.map(t => {
-                  return <a href={t.url} target="_blank" rel="noopener noreferrer">{t.url}</a>
+                  return <><a href={t.url} target="_blank" rel="noopener noreferrer">{t.url}</a><br></br></>
                 })}
                 </> :
               <h2>You don't have any purchased product</h2>

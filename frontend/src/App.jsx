@@ -12,7 +12,7 @@ import PurchaseProduct from "./components/PurchaseProduct/PurchaseProduct";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: true,
+      initialData: undefined
     },
   },
 });

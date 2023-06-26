@@ -74,7 +74,7 @@ const purchaseProduct = async (req, res) => {
         return res.status(404).json({ success: false, message: 'Product not found in database' });
       
       if (product.stock == 1) {
-        //obrisat ga iz svih ostalih korpi i tek onda odavje 
+        //ovdje se on treba obrisati i iz proizvoda i iz cart itema ali nmg s tim sad nije bitno cisto napomena
       }
 
         const updatedProduct = await Product.findOneAndUpdate(

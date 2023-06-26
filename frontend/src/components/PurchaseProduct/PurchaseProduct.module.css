@@ -1,18 +1,13 @@
-/* Add this CSS code in a separate CSS file or in a <style> tag */
 
-/* Style for the container div */
 .purchase-container {
     display: flex;
     flex-direction: column;
-    min-width: 350px;
-    max-width: max-content;
-    justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    align-items: center;
-    margin-top: 2vh;
     border: rgba(105, 105, 105, 0.1) 1px solid;
     padding: 15px;
+    width: 50%;
+    margin-bottom: 10px;
   }
   
   .purchase-container h2{
@@ -20,14 +15,12 @@
     font-weight: 100;
   }
 
-  /* Style for the labels */
   .purchase-container label {
     margin-bottom: 5px;
     color: white;
     font-size: 20px;
   }
   
-  /* Style for the inputs */
   .purchase-container input {
     padding: 8px;
     margin-bottom: 10px;
@@ -36,25 +29,23 @@
     width: 100%;
   }
   
-  /* Style for the submit button (example) */
-  .purchase-container button {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .purchase-container button:hover {
-    background-color: #45a049;
-  }
-  
 
   .details{
     align-items: center;
+    display: flex;
+    flex-direction: column;
   }
 
   .details img{
     width: 30%;
+  }
+
+  .fillData{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .fillData input{
+    width: 50%;
   }

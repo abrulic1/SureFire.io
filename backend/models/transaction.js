@@ -15,18 +15,15 @@ const transactionSchema = new mongoose.Schema(
     },
     from: {
       type: String,
-      required: true,
-      unique: true
+      required: true
     },
    to: {
     type: String,
-    required: true,
-    unique: true
+    required: true
     },
     user_address: {
       type: String,
-      required: true,
-      unique: true
+      required: true
     },
     user_info: {
       type: mongoose.Schema.Types.Mixed,
@@ -41,6 +38,4 @@ const transactionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-
-transactionSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('Transaction', transactionSchema);

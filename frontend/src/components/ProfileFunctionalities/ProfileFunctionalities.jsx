@@ -19,7 +19,8 @@ const Functionalities = ({ userFunctionalities, setUserFunctionalities }) => {
       try {
         localStorage.removeItem("account");
         localStorage.removeItem("balance");
-        alert("Please disconnect from MetaMask manually.");
+         alert("Please disconnect from MetaMask manually.");
+         navigate('/');
       } catch (error) {
         console.error("Error occurred while logging out:", error);
       }

@@ -19,6 +19,7 @@ const MyShop = () => {
     const { data: products, isLoading } = useQuery("products-1", () => getProductsByOwnerAddress(localStorage.getItem("account")),  {staleTime: 5000});
     return (
         <>
+            <Header></Header>
             <div className={MyShopStyles.collections}>
                 <h1>Your items</h1>
                 <div className={MyShopStyles["collections-cards"]}>
