@@ -15,12 +15,11 @@ const MyCart = ({ setIsCartShown }) => {
     setIsCartShown(false);
   };
 
-  const { data: userOrders} = useQuery('userOrders', () =>
-    getUserItems(localStorage.getItem('account')),{ staleTime: 6000 }
-  );
+  const { data: userOrders } = useQuery('userOrders', () =>
+    getUserItems(localStorage.getItem('account')));
 
-  
   const [productsData, setProductsData] = useState([]);
+  const [isFetchComplete, setIsFetchComplete] = useState(false); // Flag variable
 
   useEffect(() => {
     const fetchProductsData = async () => {
@@ -35,6 +34,7 @@ const MyCart = ({ setIsCartShown }) => {
 
         console.log("fetchedproducts: ", fetchedProducts)
         setProductsData(fetchedProducts);
+        setIsFetchComplete(true); // Flag to indicate the loop is done
       } catch (error) {
         console.error(error);
       }
@@ -43,6 +43,15 @@ const MyCart = ({ setIsCartShown }) => {
     fetchProductsData();
   }, [userOrders]);
 
+  // Function to check if the loop is done
+  const checkIfLoopIsDone = () => {
+    if (isFetchComplete) {
+      console.log("The loop is done.");
+    } else {
+      console.log("The loop is still in progress.");
+    }
+  };
+
   return (
     <div className={MyCartStyles['cart']}>
       <div className={MyCartStyles['close-btn']}>
@@ -50,16 +59,16 @@ const MyCart = ({ setIsCartShown }) => {
         <button><img src={Close} onClick={closeCart} alt="Close"></img></button>
       </div>
       <div className={MyCartStyles['cart-content']}>
-        {productsData == null || productsData == 'undefined' || userOrders==null ?
-          <LoadingCircle /> :
-        userOrders && userOrders.length > 0 ? (
+        {!isFetchComplete ? (
+          <LoadingCircle />
+        ) : userOrders && userOrders.length > 0 ? (
           productsData.map((product, index) => (
             <div key={index} className={MyCartStyles.item}>
               <span className={MyCartStyles.spanko}>
                 {console.log("product: ", product)}
-              <img src={`data:image/*;base64,${product.image}`}></img>
+                <img src={`data:image/*;base64,${product.image}`}></img>
                 <h2>{product.name}</h2>
-                </span>
+              </span>
               <Button mode='dark' text="Buy" onClick={() =>
                 navigate(`/purchase-product?id=${product._id}`)} />
             </div>

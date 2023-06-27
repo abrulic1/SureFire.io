@@ -8,14 +8,9 @@ import Item from "./components/Item/Item";
 import HomePage from "./pages/HomePage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import PurchaseProduct from "./components/PurchaseProduct/PurchaseProduct";
+import { ReactQueryDevtools } from 'react-query/devtools'
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      initialData: undefined
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 export default function App() {
   return (
@@ -32,6 +27,7 @@ export default function App() {
             <Route path="/purchase-product" Component={PurchaseProduct} query="id"></Route>
           </Routes>
         </Router>
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </div>
   );

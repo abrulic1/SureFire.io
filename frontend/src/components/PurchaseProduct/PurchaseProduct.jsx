@@ -16,9 +16,7 @@ const PurchaseProduct = () => {
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
 
-  const { data: product } = useQuery('productId', () => fetchProductById(productId), {
-    initialData: undefined
-  });
+  const { data: product, isFetching } = useQuery('productId', () => fetchProductById(productId));
 
   const handlePurchase = async () => {
     try {
@@ -34,7 +32,7 @@ const PurchaseProduct = () => {
     <>
       <h1>PURCHASE PRODUCT</h1>
       <div className={PurchaseProductStyles['purchase-container']}>
-        {product == null || product == 'undefined' ? (
+        {isFetching ? (
           <>
             {console.log("product", product)}
             <LoadingCircle />
