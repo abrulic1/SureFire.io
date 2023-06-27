@@ -12,13 +12,13 @@ import MyCart from "../MyCart/MyCart";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [isShown, setIsShown] = useState(false);
+  // const [isShown, setIsShown] = useState(false);
   const [userFunctionalities, setUserFunctionalities] = useState(false);
   const [isCartShown, setIsCartShown] = useState(false);
 
-  const handleClick = () => {
-    setIsShown((currentState) => !currentState);
-  };
+  // const handleClick = () => {
+  //   setIsShown((currentState) => !currentState);
+  // };
 
   return (
     <div className={HeaderStyles.header}>
@@ -32,14 +32,14 @@ const Header = () => {
         setUserFunctionalities={setUserFunctionalities}
         setIsCartShown={setIsCartShown}
       />
-      <button className={HeaderStyles.menu} onClick={handleClick}>
+      {/* <button className={HeaderStyles.menu} onClick={handleClick}>
         {isShown ? (
           <img alt="close" src={Close}></img>
         ) : (
           <img alt="menu" src={Menu}></img>
         )}
       </button>
-      {isShown && <SideDrawer />}
+      {isShown && <SideDrawer />} */}
       {userFunctionalities && (
         <Functionalities
           userFunctionalities={userFunctionalities}

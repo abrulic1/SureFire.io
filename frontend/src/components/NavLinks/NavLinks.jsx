@@ -25,6 +25,7 @@ const NavLinks = ({ setUserFunctionalities, setIsCartShown }) => {
 
   const handleConnectWallet = async () => {
     const connectedAccount = await connectWalletHandler(setIsConnected, setBalance);
+    if (connectedAccount == null) return;
     setAccount(connectedAccount);
     localStorage.setItem("account", connectedAccount);
   };
@@ -36,7 +37,7 @@ const NavLinks = ({ setUserFunctionalities, setIsCartShown }) => {
   return (
     <div className={NavLinksStyles["images-actions"]}>
       {!localStorage.getItem("account") ? (
-        <button
+        <button 
           title="Connect with MetaMask"
           className={NavLinksStyles.connect}
           onClick={handleConnectWallet}
@@ -51,11 +52,11 @@ const NavLinks = ({ setUserFunctionalities, setIsCartShown }) => {
             {/* <button className={NavLinksStyles.profile} title="Profile">
               <img src={ProfileIcon} onClick={showFunctionalities} />
             </button> */}
-            </>
-      )}
-      <button title="My Cart">
+                <button title="My Cart">
         <img src={Cart} alt="Cart" onClick={showCart} />
       </button>
+            </>
+      )}
     </div>
   );
 };

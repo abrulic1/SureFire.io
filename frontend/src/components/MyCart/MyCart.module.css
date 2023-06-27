@@ -17,6 +17,15 @@
     font-size: 15px;
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: max-content;
+  margin-top: 50%;
+}
+
+
 
 .cart img{
     width: 30px;

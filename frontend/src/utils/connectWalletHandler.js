@@ -4,6 +4,7 @@ const connectWalletHandler = async (setIsConnected, setBalance) => {
   if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
     try {
       let arrayOfAccounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      if (arrayOfAccounts.length == 0) return null;
       const account = arrayOfAccounts[0];
       alert(`You are connected with one MetaMask account`);
       const web3 = new Web3(window.ethereum);

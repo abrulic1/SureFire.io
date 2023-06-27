@@ -18,14 +18,21 @@
     cursor: pointer;
 }
 
+/* .logo img{
+    width: 3vw;
+    min-width: 45px;
+    height: 5.5vh;
+    margin: 5px;
+    margin-right: 0;
+} */
+
+h1{
+    font-size: 1.5rem;
+
+}
 
 .menu{
     display: none;
     cursor: pointer;
 }
 
-/* @media screen and (max-width: 1160px) {
-    .menu{
-      display: block;
-    }
-} */

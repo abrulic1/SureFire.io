@@ -36,8 +36,8 @@ span:hover{
     margin-left: 15px;
 }
 
-@media screen and (min-width: 1160px) {
+/* @media screen and (min-width: 1160px) {
     .side-drawer{
       display: none;
     }
-}
+} */

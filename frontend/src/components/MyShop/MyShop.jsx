@@ -7,6 +7,7 @@ import { useQuery } from "react-query";
 import { deploySmartContract, getContractByUser } from "../../services/contract-service";
 import { getProductsByOwnerAddress } from "../../services/user_products-service";
 import LoadingCircle from "../LoadingCircle/LoadingCircle";
+import { PropagateLoader } from "react-spinners";
 const MyShop = () => {
     const navigate = useNavigate();
 
@@ -23,7 +24,10 @@ const MyShop = () => {
             <div className={MyShopStyles.collections}>
                 <h1>Your items</h1>
                 <div className={MyShopStyles["collections-cards"]}>
-                    {isLoading ? <LoadingCircle /> : 
+                    {isLoading ? (   <div className={MyShopStyles.loading}>
+        <PropagateLoader color="#F7F7F7" />
+                    </div>)
+                        : 
                         (products && products.length > 0) ? (
                         <React.Fragment>
                             {products.map((product) => (

@@ -8,18 +8,17 @@ import LoadingCircle from '../LoadingCircle/LoadingCircle';
 import { purchaseProductFromDB } from '../../services/product-service';
 import { getUserItems } from '../../services/cart_item-service';
 import { useNavigate } from "react-router-dom";
-
+import { PropagateLoader } from 'react-spinners';
 const MyCart = ({ setIsCartShown }) => {
   const navigate = useNavigate();
   const closeCart = () => {
     setIsCartShown(false);
   };
 
-  const { data: userOrders } = useQuery('userOrders', () =>
+  const { data: userOrders, isFetching } = useQuery('userOrders', () =>
     getUserItems(localStorage.getItem('account')));
 
   const [productsData, setProductsData] = useState([]);
-  const [isFetchComplete, setIsFetchComplete] = useState(false); // Flag variable
 
   useEffect(() => {
     const fetchProductsData = async () => {
@@ -34,7 +33,6 @@ const MyCart = ({ setIsCartShown }) => {
 
         console.log("fetchedproducts: ", fetchedProducts)
         setProductsData(fetchedProducts);
-        setIsFetchComplete(true); // Flag to indicate the loop is done
       } catch (error) {
         console.error(error);
       }
@@ -43,14 +41,6 @@ const MyCart = ({ setIsCartShown }) => {
     fetchProductsData();
   }, [userOrders]);
 
-  // Function to check if the loop is done
-  const checkIfLoopIsDone = () => {
-    if (isFetchComplete) {
-      console.log("The loop is done.");
-    } else {
-      console.log("The loop is still in progress.");
-    }
-  };
 
   return (
     <div className={MyCartStyles['cart']}>
@@ -59,8 +49,10 @@ const MyCart = ({ setIsCartShown }) => {
         <button><img src={Close} onClick={closeCart} alt="Close"></img></button>
       </div>
       <div className={MyCartStyles['cart-content']}>
-        {!isFetchComplete ? (
-          <LoadingCircle />
+        {isFetching ? (
+           <div className={MyCartStyles.loading}>
+           <PropagateLoader color="#F7F7F7" />
+                       </div>
         ) : userOrders && userOrders.length > 0 ? (
           productsData.map((product, index) => (
             <div key={index} className={MyCartStyles.item}>

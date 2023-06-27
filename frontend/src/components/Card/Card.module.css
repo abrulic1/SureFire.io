@@ -6,8 +6,8 @@
     border: 1px solid rgb(39, 39, 39);
     width: 15vw;
     height: 40vh;
-    min-width: 250px;
-    min-height: max-content;
+    min-width: 200px;
+    min-height: 100px;
     background-color: white;
     border-radius: 8px;
     overflow: hidden;
@@ -37,15 +37,24 @@
 .description{
     color: black;
     text-align: center;
-    font-size: 13px;
+    font-size: 1rem;
 }
 
-button {
-  padding: 10px 20px;
-  /* background-color: #030412; */
-  color: #fff;
-  font-weight: bold;
-  border-radius: 4px;
-  margin: 5px;
-  width: max-content;
+ .description h2{
+  font-size: 1rem;
+}
+
+
+@media (max-width: 600px) {
+    .card{
+     /* max-width: 10%; */
+     max-height: 150px;
+     max-width: 200px;
+     min-width: 100px;
+     min-height: 150px;
+    }
+
+    .description h2{
+      font-size: 0.6rem;
+    }
 }

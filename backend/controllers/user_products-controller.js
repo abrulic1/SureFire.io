@@ -58,7 +58,30 @@ const getProductsWhereOwnerIsNot = async (req, res) => {
     }
 }
 
+const getAllProducts = async (req, res) => {
+    try {
+        const products = await User_Products.find();
+        const onlyProducts = products.map(p => p.product_id).flat();
+        const productsagain = [];
+        for (const id of onlyProducts) {
+            const p = await Product.findById(id);
+            productsagain.push(p)
+        }
+        
+        const updatedProducts = productsagain.map((product) => {
+            return {
+              ...product._doc,
+              image: Buffer.from(product.image).toString('base64')
+            };
+          });
+          res.status(200).json(updatedProducts);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 exports.addUserProduct = addUserProduct;
 exports.getOwner = getOwner;
 exports.getUserProducts = getUserProducts;
 exports.getProductsWhereOwnerIsNot = getProductsWhereOwnerIsNot;
+exports.getAllProducts = getAllProducts;

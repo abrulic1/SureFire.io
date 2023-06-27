@@ -57,8 +57,16 @@ button:hover{
     border-bottom-left-radius: 0;
 }
 
-@media screen and (max-width: 1160px) {
+/* @media screen and (max-width: 1160px) {
     .images-actions{
       display: none;
     }
+} */
+
+
+.images-actions button {
+    border: none;
+    width: max-content;
+    border-radius: 2px;
+    font-size: 1rem;
 }

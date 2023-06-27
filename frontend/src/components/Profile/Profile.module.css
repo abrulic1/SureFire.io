@@ -1,7 +1,7 @@
 
 .profile-card{
     margin-top: 5%;
-    width: 50%;
+    width: max-content;
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
@@ -11,17 +11,6 @@
 .profile-card p{
     color: black;
 }
-.image{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.image img{
-    width: 25%;
-    height: 25%;
-    border-radius: 50%;
-}
-
     .info{
         padding: 15px 15px 15px 20px;
         margin-top: 10px;
@@ -59,3 +48,12 @@
 .buttons button:hover{
     scale: 1.1;
 }
+
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
