@@ -16,9 +16,7 @@
 <br>
 
 <p>A new web application that allows users to securely sell their products using the Ethereum blockchain. Using one of the most famous crypto wallets, MetaMask, every user is enabled to sell and buy products whose information are securely stored on a unique Solidity Smart Contract. 
-   <a href="http://surefireio.me" target="_blank">
-          Website: SureFire.io
-          </a>
+
 </p>
 <p>For any suggestions regarding the source code of the application, feel free to contact me by email: abrulic1@etf.unsa.ba.
 </p>
